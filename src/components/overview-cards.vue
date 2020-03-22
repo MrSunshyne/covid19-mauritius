@@ -5,8 +5,9 @@
         :label="'Active Cases'"
         :value="17"
         :color="'red'"
-        :diff="'+1'"
+        :diff="'+3'"
         :icon="'corona-icon'"
+        title="Does not include recovered or deceased people"
         >icon</StatCard
       >
       <StatCard

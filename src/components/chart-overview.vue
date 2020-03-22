@@ -45,6 +45,9 @@ export default {
         scales: {
           yAxes: [
             {
+              gridLines: {
+                color: "rgba(255,255,255,0.1)"
+              },
               ticks: {
                 stepSize: 1
               }
@@ -80,7 +83,7 @@ export default {
             borderWidth: 4,
             label: "Active Cases",
             borderColor: "#E44450",
-            backgroundColor: "transparent",
+            backgroundColor: "rgba(228,68,80,0.1)",
             data: this.getActive
           },
           {
@@ -99,7 +102,7 @@ export default {
           },
           {
             label: "Total",
-            borderColor: "lightgray",
+            borderColor: "#f5dd06",
             backgroundColor: "transparent",
             data: this.getTotal,
             ...this.points

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
+import timeago from "../helpers/timeago";
 import { extractData, fetchJson, groupById } from '@/helpers';
 
 Vue.use(Vuex);
@@ -86,7 +86,10 @@ export default new Vuex.Store({
       state.stats = stats;
     },
     [SET_UPDATED](state, updated) {
-      state.updated = updated.$t;
+      state.updated = {
+        value: updated.$t,
+        ago: timeago(updated.$t)
+      }
     }
   },
 
