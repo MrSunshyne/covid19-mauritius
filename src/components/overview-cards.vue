@@ -11,14 +11,6 @@
         >icon</StatCard
       >
       <StatCard
-        :label="'Recovered'"
-        :value="0"
-        :color="'green'"
-        :diff="'+0'"
-        :icon="'recovered'"
-        >icon</StatCard
-      >
-      <StatCard
         :label="'Deceased'"
         :value="2"
         :color="'gray'"
@@ -26,6 +18,15 @@
         :icon="'deceased'"
         >icon</StatCard
       >
+      <StatCard
+        :label="'Recovered'"
+        :value="0"
+        :color="'green'"
+        :diff="'+0'"
+        :icon="'recovered'"
+        >icon</StatCard
+      >
+
       <StatCard
         :label="'Total'"
         :value="24"
