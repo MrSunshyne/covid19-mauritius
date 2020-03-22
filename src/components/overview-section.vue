@@ -6,7 +6,7 @@
         :value="17"
         :color="'red'"
         :diff="'+1'"
-        :icon="'corona'"
+        :icon="'corona-icon'"
         >icon</StatCard
       >
       <StatCard
@@ -14,7 +14,7 @@
         :value="0"
         :color="'green'"
         :diff="'+0'"
-        :icon="'corona'"
+        :icon="'recovered'"
         >icon</StatCard
       >
       <StatCard
@@ -22,7 +22,7 @@
         :value="1"
         :color="'gray'"
         :diff="'+0'"
-        :icon="'corona'"
+        :icon="'deceased'"
         >icon</StatCard
       >
       <StatCard
@@ -30,7 +30,7 @@
         :value="18"
         :color="'red'"
         :diff="'0'"
-        :icon="'corona'"
+        :icon="'total'"
         >icon</StatCard
       >
     </div>
