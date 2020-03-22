@@ -1,14 +1,15 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 
-import { extractData, fetchJson, groupById, getInt } from '@/helpers';
+import timeago from "../helpers/timeago";
+import { extractData, fetchJson, groupById, getInt } from "@/helpers";
 
 Vue.use(Vuex);
 
-export const SET_STATS = 'SET_STATS';
-export const SET_UPDATED = 'SET_UPDATED';
+export const SET_STATS = "SET_STATS";
+export const SET_UPDATED = "SET_UPDATED";
 
-export const FETCH_STATS = 'FETCH_STATS';
+export const FETCH_STATS = "FETCH_STATS";
 
 export default new Vuex.Store({
   state: {
@@ -26,78 +27,78 @@ export default new Vuex.Store({
     getTimestamps(state) {
       if (state.stats.length > 0) {
         let result = state.stats.map(row => row.timestamp);
-        return result
+        return result;
       } else {
-        return {}
+        return {};
       }
     },
     getNew(state) {
       if (state.stats.length > 0) {
         let result = state.stats.map(row => row.new);
-        return result
+        return result;
       } else {
-        return {}
+        return {};
       }
     },
     getRecovered(state) {
       if (state.stats.length > 0) {
         let result = state.stats.map(row => row.recovered);
-        return result
+        return result;
       } else {
-        return {}
+        return {};
       }
     },
     getDeceased(state) {
       if (state.stats.length > 0) {
         let result = state.stats.map(row => row.deceased);
-        return result
+        return result;
       } else {
-        return {}
+        return {};
       }
     },
     getTotalDeceased(state) {
       if (state.stats.length > 0) {
         let result = state.stats.map(row => row.cumdeceased);
-        return result
+        return result;
       } else {
-        return {}
+        return {};
       }
     },
     getTotal(state) {
       if (state.stats.length > 0) {
         let result = state.stats.map(row => row.cumnew);
-        return result
+        return result;
       } else {
-        return {}
+        return {};
       }
     },
     getActive(state) {
       if (state.stats.length > 0) {
         let result = state.stats.map(row => row.active);
-        return result
+        return result;
       } else {
-        return {}
+        return {};
       }
     },
     getOverview(state) {
       let overview = {
         active: {
           diff: 0,
-          amt: 0,
+          amt: 0
         },
         recovered: {
           diff: 0,
-          amt: 0,
+          amt: 0
         },
         deceased: {
           diff: 0,
-          amt: 0,
+          amt: 0
         },
         total: {
           diff: 0,
-          amt: 0,
-        },
-      }
+          amt: 0
+        }
+      };
 
       if (state.stats.length === 0) {
         return overview;
@@ -128,13 +129,16 @@ export default new Vuex.Store({
       state.stats = stats;
     },
     [SET_UPDATED](state, updated) {
-      state.updated = updated.$t;
+      state.updated = {
+        value: updated.$t,
+        ago: timeago(updated.$t)
+      };
     }
   },
 
   actions: {
     async [FETCH_STATS]({ commit }) {
-      const URL = require('@/constants/urls.json')['covid-stats'];
+      const URL = require("@/constants/urls.json")["covid-stats"];
 
       let entry;
       let updated;
@@ -144,12 +148,8 @@ export default new Vuex.Store({
         entry = feed.entry;
         updated = feed.updated;
       } catch (error) {
-        throw new Error(
-          'Error should be caught by Vue global error handler.' + error
-        );
+        throw new Error("Error should be caught by Vue global error handler." + error);
       }
-
-
 
       const stats = extractData(entry);
       console.log(stats);

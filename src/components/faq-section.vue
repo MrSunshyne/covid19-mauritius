@@ -5,6 +5,14 @@
       class="faq px-8 sm:px-0 grid py-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
     >
       <li>
+        <label>What is the difference between Active Cases and Total?</label>
+        <p>
+          Active cases are the last reported number of people who have the
+          infection. It does not include deceased people or people who have
+          recovered.
+        </p>
+      </li>
+      <li>
         <label>What is the source ?</label>
         <p>
           Local newspapers and radio stations.
@@ -12,7 +20,8 @@
       </li>
       <li>
         <label>When was this page last updated?</label>
-        <p>Last updated: {{ getUpdated }}</p>
+        <p>Last updated: {{ getUpdated.ago }}</p>
+        <p>{{ getUpdated.value }}</p>
       </li>
       <li>
         <label>Should I trust this page?</label>

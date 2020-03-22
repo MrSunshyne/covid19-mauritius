@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import OverviewSection from "../components/overview-section";
+import OverviewSection from "../components/overview-cards";
 import NewCases from "../components/chart-new-cases";
-import VirusProgression from "../components/chart-virus-progression";
+import VirusProgression from "../components/chart-overview";
 import CreditsSection from "../components/credits-section";
 import FaqSection from "../components/faq-section";
 import ShareSection from "../components/share-section";

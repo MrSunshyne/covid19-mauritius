@@ -41,7 +41,7 @@ export default {
           ],
           xAxes: [
             {
-              stacked: true
+              stacked: false
             }
           ]
         }
@@ -66,7 +66,7 @@ export default {
           },
           {
             label: "New Cases",
-            // backgroundColor: "#ff0000",
+            backgroundColor: "#E44450",
             data: this.getNew
           }
         ]

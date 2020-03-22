@@ -8,7 +8,9 @@
 
     <ul class="flex mr-3">
       <li>
-        <a href="#" target="_blank">Last updated: {{ getUpdated }}</a>
+        <a href="#" target="_blank" :title="getUpdated.value"
+          >Last updated: {{ getUpdated.ago }}</a
+        >
       </li>
       <!--      <li><a href="#" target="_blank">Statistics →</a></li>-->
       <!--      <li><a href="#" target="_blank">About →</a></li>-->
