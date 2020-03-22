@@ -1,13 +1,21 @@
 <template>
-  <div class="py-8 px-8 md:px-0 bg-gray-300">
+  <div class="py-8 px-8 md:px-0 bg-gray-900">
     <div class="container mx-auto">
-      <h2 class="text-2xl leading-none pb-8">Virus Progression</h2>
+      <h2 class="text-2xl leading-none font-bold text-center pb-8 text-white">
+        Overview
+      </h2>
       <div class="chart w-full">
         <line-chart
           :responsive="true"
           :chart-data="datacollection"
           :options="options"
         ></line-chart>
+      </div>
+      <div>
+        <p class="text-gray-500 text-center pt-5">
+          A cummulative chart showing statistics about Active Cases, Deceased,
+          Recovered and the Total number of cases.
+        </p>
       </div>
     </div>
   </div>
@@ -28,7 +36,12 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        height: 500,
+        legend: {
+          display: true,
+          labels: {
+            fontColor: "rgb(255, 255, 255)"
+          }
+        },
         scales: {
           yAxes: [
             {
@@ -43,6 +56,11 @@ export default {
             }
           ]
         }
+      },
+      points: {
+        pointStyle: "circle",
+        borderWidth: 1,
+        datasetStrokeWidth: 1
       }
     };
   },
@@ -58,25 +76,47 @@ export default {
         labels: this.getTimestamps,
         datasets: [
           {
+            ...this.points,
+            borderWidth: 4,
             label: "Active Cases",
-            borderColor: "#ff0000",
+            borderColor: "#E44450",
             backgroundColor: "transparent",
-
             data: this.getActive
           },
           {
-            label: "Total",
-            borderColor: "gray",
-
+            label: "Deceased",
+            borderColor: "#fff",
             backgroundColor: "transparent",
-            data: this.getTotal
+            data: this.getTotalDeceased,
+            ...this.points
+          },
+          {
+            label: "Recovered",
+            borderColor: "#4bce00",
+            backgroundColor: "transparent",
+            data: this.getRecovered,
+            ...this.points
+          },
+          {
+            label: "Total",
+            borderColor: "lightgray",
+            backgroundColor: "transparent",
+            data: this.getTotal,
+            ...this.points
           }
         ]
       };
     }
   },
   computed: {
-    ...mapGetters(["getStats", "getTimestamps", "getTotal", "getActive"])
+    ...mapGetters([
+      "getStats",
+      "getTimestamps",
+      "getTotal",
+      "getTotalDeceased",
+      "getRecovered",
+      "getActive"
+    ])
   }
 };
 </script>

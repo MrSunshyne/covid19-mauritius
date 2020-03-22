@@ -1,7 +1,9 @@
 <template>
   <div class="py-8 px-8 md:px-0 bg-gray-100">
     <div class="container mx-auto ">
-      <h2 class="text-2xl leading-none pb-8">New Cases</h2>
+      <h2 class="text-2xl leading-none font-bold text-center pb-8">
+        New Cases
+      </h2>
       <div class="chart-container w-full relative" v-if="getStats">
         <bar-chart
           :responsive="true"
@@ -59,7 +61,7 @@ export default {
         datasets: [
           {
             label: "Deceased",
-            backgroundColor: "#ff0000",
+            backgroundColor: "#111",
             data: this.getDeceased
           },
           {

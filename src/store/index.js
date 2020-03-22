@@ -34,6 +34,14 @@ export default new Vuex.Store({
         return {}
       }
     },
+    getRecovered(state) {
+      if (state.stats.length > 0) {
+        let result = state.stats.map(row => row.recovered);
+        return result
+      } else {
+        return {}
+      }
+    },
     getDeceased(state) {
       if (state.stats.length > 0) {
         let result = state.stats.map(row => row.deceased);
@@ -42,9 +50,17 @@ export default new Vuex.Store({
         return {}
       }
     },
+    getTotalDeceased(state) {
+      if (state.stats.length > 0) {
+        let result = state.stats.map(row => row.cumdeceased);
+        return result
+      } else {
+        return {}
+      }
+    },
     getTotal(state) {
       if (state.stats.length > 0) {
-        let result = state.stats.map(row => row.total);
+        let result = state.stats.map(row => row.cumnew);
         return result
       } else {
         return {}
