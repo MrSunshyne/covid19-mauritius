@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --dest docs",
+    "build": "vue-cli-service build",
     "deploy-gh": "npm run build && git add -A && git commit -m 'generated using npm run deploy-gh' &&  git push -u origin master"
   },
   "dependencies": {
