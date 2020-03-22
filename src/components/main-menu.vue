@@ -1,6 +1,6 @@
 <template>
   <div
-    class="main-menu container mx-auto font-bold md:flex justify-center md:justify-between items-center py-3 md:py-10"
+    class="main-menu container mx-auto font-bold md:flex justify-center md:justify-between items-center py-3 md:py-5"
   >
     <router-link class="text-center block md:inline text-3xl" :to="'/'"
       >COVID-19 Mauritius</router-link
