@@ -1,6 +1,6 @@
 <template>
 	<div class="home">
-		<h1 class="text-2xl">Welcome to your boilerplate</h1>
+		<h1 class="text-2xl">Welcome </h1>
 	</div>
 </template>
 

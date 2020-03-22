@@ -1,24 +1,7 @@
-# vue-tailwind-boilerplate
+# COVID-19 Mauritius
 
-## Project setup
-```
-npm install
-```
+Statistics about the cases of COVID-19 in Mauritius
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![Covid 19 Mauritius Image](https://github.com/MrSunshyne/covid19-mauritius/raw/master/public/og-image.jpg)
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# [View Website](https://covid19-mauritius.netlify.com)
