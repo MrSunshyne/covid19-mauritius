@@ -6,15 +6,20 @@ import { extractData, fetchJson, groupById } from '@/helpers';
 Vue.use(Vuex);
 
 export const SET_STATS = 'SET_STATS';
+export const SET_UPDATED = 'SET_UPDATED';
 
 export const FETCH_STATS = 'FETCH_STATS';
 
 export default new Vuex.Store({
   state: {
-    stats: []
+    stats: [],
+    updated: null
   },
 
   getters: {
+    getUpdated(state) {
+      return state.updated;
+    },
     getStats(state) {
       return state.stats;
     },
@@ -79,6 +84,9 @@ export default new Vuex.Store({
   mutations: {
     [SET_STATS](state, stats) {
       state.stats = stats;
+    },
+    [SET_UPDATED](state, updated) {
+      state.updated = updated.$t;
     }
   },
 
@@ -87,18 +95,24 @@ export default new Vuex.Store({
       const URL = require('@/constants/urls.json')['covid-stats'];
 
       let entry;
+      let updated;
       try {
         const { feed } = await fetchJson(URL);
+
         entry = feed.entry;
+        updated = feed.updated;
       } catch (error) {
         throw new Error(
           'Error should be caught by Vue global error handler.' + error
         );
       }
 
+
+
       const stats = extractData(entry);
       console.log(stats);
       commit(SET_STATS, stats);
+      commit(SET_UPDATED, updated);
       return stats;
     }
   }

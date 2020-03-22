@@ -12,7 +12,7 @@
       </li>
       <li>
         <label>When was this page last updated?</label>
-        <p>Last updated: {{ lastUpdated }}</p>
+        <p>Last updated: {{ getUpdated }}</p>
       </li>
       <li>
         <label>Should I trust this page?</label>
@@ -58,8 +58,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-  props: ["lastUpdated"]
+  computed: {
+    ...mapGetters(["getUpdated"])
+  }
 };
 </script>
 

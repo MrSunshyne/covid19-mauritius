@@ -7,12 +7,24 @@
     >
 
     <ul class="flex mr-3">
+      <li>
+        <a href="#" target="_blank">Last updated: {{ getUpdated }}</a>
+      </li>
       <!--      <li><a href="#" target="_blank">Statistics →</a></li>-->
       <!--      <li><a href="#" target="_blank">About →</a></li>-->
       <!--      <li><a href="#" target="_blank">Sources →</a></li>-->
     </ul>
   </div>
 </template>
+
+<script>
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters(["getUpdated"])
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 .main-menu {
