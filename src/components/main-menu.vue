@@ -7,9 +7,9 @@
     >
 
     <ul class="flex mr-3">
-      <li><a href="#" target="_blank">Statistics →</a></li>
-      <li><a href="#" target="_blank">About →</a></li>
-      <li><a href="#" target="_blank">Sources →</a></li>
+      <!--      <li><a href="#" target="_blank">Statistics →</a></li>-->
+      <!--      <li><a href="#" target="_blank">About →</a></li>-->
+      <!--      <li><a href="#" target="_blank">Sources →</a></li>-->
     </ul>
   </div>
 </template>
