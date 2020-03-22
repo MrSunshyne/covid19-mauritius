@@ -15,7 +15,13 @@
         >
           {{ value }}
         </div>
-        <div class="diff" v-if="diffValue">{{ diff }}</div>
+        <div
+          class="diff text-red-400 font-bold "
+          :title="`${diff} new cases since yesterday`"
+          v-if="diffValue"
+        >
+          {{ diff }}
+        </div>
       </div>
     </div>
   </div>
