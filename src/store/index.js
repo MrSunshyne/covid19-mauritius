@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import { extractData, fetchJson, groupById } from '@/helpers';
+import { extractData, fetchJson, groupById, getInt } from '@/helpers';
 
 Vue.use(Vuex);
 
@@ -78,6 +78,48 @@ export default new Vuex.Store({
       } else {
         return {}
       }
+    },
+    getOverview(state) {
+      let overview = {
+        active: {
+          diff: 0,
+          amt: 0,
+        },
+        recovered: {
+          diff: 0,
+          amt: 0,
+        },
+        deceased: {
+          diff: 0,
+          amt: 0,
+        },
+        total: {
+          diff: 0,
+          amt: 0,
+        },
+      }
+
+      if (state.stats.length === 0) {
+        return overview;
+      }
+
+      let i = state.stats.length - 1;
+
+      console.log(state.stats[i]);
+
+      overview.active.amt += getInt(state.stats[i].active);
+      overview.active.diff += getInt(state.stats[i].new);
+
+      overview.recovered.amt += getInt(state.stats[i].cumrecovered);
+      overview.recovered.diff += getInt(state.stats[i].recovered);
+
+      overview.deceased.amt += getInt(state.stats[i].cumdeceased);
+      overview.deceased.diff += getInt(state.stats[i].deceased);
+
+      overview.total.amt += getInt(state.stats[i].active) + getInt(state.stats[i].cumdeceased) - getInt(state.stats[i].cumrecovered);
+      overview.total.diff = getInt(state.stats[i].new);
+
+      return overview;
     }
   },
 

@@ -1,6 +1,6 @@
 <template>
   <div class="shadow p-4 flex">
-    <div class="icon w-20 mr-2  md:mr-4 flex justify-center items-center">
+    <div class="icon w-20 mr-2 md:mr-4 flex justify-center items-center">
       <img
         class="block w-12 h-12 md:w-20 md:h-20 object-contain"
         :src="`/images/${icon}.svg`"
@@ -12,16 +12,19 @@
       <div class="value-wrapper flex items-baseline">
         <div
           class="value text-gray-800 text-3xl md:text-5xl leading-none font-bold pr-3"
-        >
-          {{ value }}
+        >{{ value }}</div>
+        <div class="diff" v-if="diffo.show">
+          <span>{{ diffo.sign}}</span>
+          <span>{{ diffo.abs }}</span>
         </div>
-        <div class="diff" v-if="diffValue">{{ diff }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getInt } from "@/helpers";
+
 export default {
   props: {
     label: {
@@ -37,7 +40,7 @@ export default {
       default: 0
     },
     diff: {
-      type: String,
+      type: Number,
       default: 0
     },
     color: {
@@ -46,19 +49,13 @@ export default {
     }
   },
   computed: {
-    diffValue() {
-      if (typeof this.diff == "string") {
-        let sign = this.diff.slice(0, 1);
-        let value = parseInt(this.diff.slice(1, this.diff.length));
-        console.log(value);
-        if (isNaN(value)) {
-          return 0;
-        } else {
-          return value;
-        }
-      } else {
-        return "not string";
-      }
+    diffo() {
+      let val = getInt(this.diff);
+      let abs = Math.abs(val);
+      let show = abs !== 0;
+      let sign = val > 0 ? "+" : "-";
+
+      return { abs, show, sign };
     }
   }
 };

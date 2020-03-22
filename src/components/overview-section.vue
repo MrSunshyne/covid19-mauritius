@@ -1,47 +1,50 @@
 <template>
-  <div class="px-12 pb-10 sm:px-0 container mx-auto ">
-    <div class="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-5">
+  <div class="px-12 pb-10 sm:px-0 container mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
       <StatCard
         :label="'Active Cases'"
-        :value="17"
+        :value="overview.active.amt"
         :color="'red'"
-        :diff="'+1'"
+        :diff="overview.active.diff"
         :icon="'corona-icon'"
-        >icon</StatCard
-      >
+      >icon</StatCard>
       <StatCard
         :label="'Recovered'"
-        :value="0"
+        :value="overview.recovered.amt"
         :color="'green'"
-        :diff="'+0'"
+        :diff="overview.recovered.diff"
         :icon="'recovered'"
-        >icon</StatCard
-      >
+      >icon</StatCard>
       <StatCard
         :label="'Deceased'"
-        :value="1"
+        :value="overview.deceased.amt"
         :color="'gray'"
-        :diff="'+0'"
+        :diff="overview.deceased.diff"
         :icon="'deceased'"
-        >icon</StatCard
-      >
+      >icon</StatCard>
       <StatCard
         :label="'Total'"
-        :value="18"
+        :value="overview.total.amt"
         :color="'red'"
-        :diff="'0'"
+        :diff="overview.total.diff"
         :icon="'total'"
-        >icon</StatCard
-      >
+      >icon</StatCard>
     </div>
   </div>
 </template>
 
 <script>
 import StatCard from "./stat-card";
+import { mapGetters } from "vuex";
+
 export default {
   components: {
     StatCard
+  },
+  computed: {
+    ...mapGetters({
+      overview: "getOverview"
+    })
   }
 };
 </script>

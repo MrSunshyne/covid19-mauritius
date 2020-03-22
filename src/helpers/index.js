@@ -122,3 +122,21 @@ export function sortBy(list, rules) {
 
     return sortedObject
 }
+
+// getInt returns the integer value given a string
+export function getInt(raw, defaultValue = 0) {
+    if (raw === "" || isNaN(raw) || raw === null) {
+        return defaultValue;
+    }
+
+    try {
+        let v = parseInt(raw, 10);
+        if (typeof v === "number") {
+            return v;
+        }
+
+        return defaultValue
+    } catch (e) {
+        return defaultValue;
+    }
+}
