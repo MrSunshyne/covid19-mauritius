@@ -17,6 +17,46 @@ export default new Vuex.Store({
   getters: {
     getStats(state) {
       return state.stats;
+    },
+    getTimestamps(state) {
+      if (state.stats.length > 0) {
+        let result = state.stats.map(row => row.timestamp);
+        return result
+      } else {
+        return {}
+      }
+    },
+    getNew(state) {
+      if (state.stats.length > 0) {
+        let result = state.stats.map(row => row.new);
+        return result
+      } else {
+        return {}
+      }
+    },
+    getDeceased(state) {
+      if (state.stats.length > 0) {
+        let result = state.stats.map(row => row.deceased);
+        return result
+      } else {
+        return {}
+      }
+    },
+    getTotal(state) {
+      if (state.stats.length > 0) {
+        let result = state.stats.map(row => row.total);
+        return result
+      } else {
+        return {}
+      }
+    },
+    getActive(state) {
+      if (state.stats.length > 0) {
+        let result = state.stats.map(row => row.active);
+        return result
+      } else {
+        return {}
+      }
     }
   },
 
