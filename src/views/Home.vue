@@ -8,8 +8,8 @@
 
 <script>
 import OverviewSection from "../components/overview-section";
-import NewCases from "../components/new-cases";
-import VirusProgression from "../components/virus-progression";
+import NewCases from "../components/chart-new-cases";
+import VirusProgression from "../components/chart-virus-progression";
 export default {
   name: "home",
   components: {
