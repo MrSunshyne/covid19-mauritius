@@ -3,9 +3,9 @@
     <div class="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-5">
       <StatCard
         :label="'Active Cases'"
-        :value="17"
+        :value="22"
         :color="'red'"
-        :diff="'+3'"
+        :diff="'+10'"
         :icon="'corona-icon'"
         title="Does not include recovered or deceased people"
         >icon</StatCard
@@ -20,15 +20,15 @@
       >
       <StatCard
         :label="'Deceased'"
-        :value="1"
+        :value="2"
         :color="'gray'"
-        :diff="'+0'"
+        :diff="'+1'"
         :icon="'deceased'"
         >icon</StatCard
       >
       <StatCard
         :label="'Total'"
-        :value="18"
+        :value="24"
         :color="'red'"
         :diff="'0'"
         :icon="'total'"
