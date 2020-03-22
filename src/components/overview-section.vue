@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+  <div class="px-12 sm:px-0">
+    <div class="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-5">
       <StatCard
         :label="'Active Cases'"
         :value="17"
