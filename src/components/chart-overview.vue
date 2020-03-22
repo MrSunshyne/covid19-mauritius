@@ -13,7 +13,7 @@
       </div>
       <div>
         <p class="text-gray-500 text-center pt-5">
-          A cummulative chart showing statistics about Active Cases, Deceased,
+          A cumulative chart showing statistics about Active Cases, Deceased,
           Recovered and the Total number of cases.
         </p>
       </div>
