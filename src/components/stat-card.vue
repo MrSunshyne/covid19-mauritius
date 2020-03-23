@@ -10,14 +10,14 @@
 		<div class="description">
 			<div class="label text-gray-700 text-n md:text-xl">{{ label }}</div>
 			<div class="value-wrapper flex items-baseline">
-				<div class="value text-gray-800 text-3xl md:text-5xl leading-none font-bold pr-3">{{ value }}</div>
+				<div class="value text-gray-800 self-end text-3xl md:text-5xl leading-none font-bold pr-3">{{ value }}</div>
 				<div
-					class="diff text-red-400 font-bold"
+					class="diff leading-tight text-red-400 text-xs self-end font-bold"
 					:title="`${diff} new cases since yesterday`"
 					v-if="diffo.show"
 				>
 					<span>{{ diffo.sign}}</span>
-					<span>{{ diffo.abs }}</span>
+					<span>{{ diffo.abs }} since yesterday</span>
 				</div>
 			</div>
 		</div>
