@@ -88,7 +88,7 @@ export default {
     };
   },
   mounted() {
-    // this.FETCH_TIMESERIES();
+    this.FETCH_TIMESERIES();
   },
   methods: {
     ...mapActions(['FETCH_TIMESERIES']),
