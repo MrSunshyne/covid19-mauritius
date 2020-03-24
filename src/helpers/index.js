@@ -55,8 +55,8 @@ export const getDay = function (str) {
     return days[day.getDay()];
 };
 
-export const pick = function(obj, keys) {
-    return keys.map(k => k in obj ? {[k]: obj[k]} : {})
+export const pick = function (obj, keys) {
+    return keys.map(k => k in obj ? { [k]: obj[k] } : {})
         .reduce((res, o) => Object.assign(res, o), {});
 }
 
@@ -144,4 +144,31 @@ export function getInt(raw, defaultValue = 0) {
     } catch (e) {
         return defaultValue;
     }
+}
+
+export function trimEmptyCountryData(series) {
+    let i;
+    for (i = 0; i < series.length; i++) {
+        if (
+            series[i].confirmed !== 0
+            || series[i].deaths !== 0
+            || series[i].recovered !== 0
+        ) {
+            break;
+        }
+    }
+
+    return series.slice(i + 1);
+}
+
+export function trimEmptyCountriesData(data) {
+    let countries = Object.keys(data);
+    let output = {};
+
+    for (let i = 0; i < countries.length; i++) {
+        let country = countries[i];
+        output[country] = trimEmpty(data[country]);
+    }
+
+    return output;
 }
