@@ -5,7 +5,7 @@
     <NewCases></NewCases>
     <ChartFirstdays></ChartFirstdays>
     <ShareSection></ShareSection>
-    <ChartWorldwideTrends></ChartWorldwideTrends>
+<!--    <ChartWorldwideTrends></ChartWorldwideTrends>-->
     <FaqSection></FaqSection>
     <CreditsSection></CreditsSection>
   </div>
