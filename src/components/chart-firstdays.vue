@@ -2,7 +2,7 @@
   <div class="py-8 px-8 md:px-0 bg-green-900">
     <div class="container mx-auto flex flex-col items-center">
       <h2 class="text-2xl leading-none font-bold text-center pb-8 text-white">
-        World COVID-19 Trends
+        First Days of the Virus
       </h2>
 
       <div class="controls-wrapper flex">
@@ -33,6 +33,7 @@
 import LineChart from "../helpers/LineChart";
 import BarChart from "../helpers/BarChart";
 import Datepicker from 'vuejs-datepicker';
+import { trimEmptyCountryData, trimEmptyCountriesData } from '../helpers'
 
 import { mapGetters, mapActions } from "vuex";
 export default {
@@ -70,7 +71,6 @@ export default {
           ],
           xAxes: [
             {
-              type: 'time',
               bounds: 'ticks',
               ticks: {
                 source: 'labels'
@@ -101,15 +101,13 @@ export default {
       let o = Math.round, r = Math.random, s = 255;
       return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
     },
-    getDates(startDate, endDate, interval) {
-      const duration = endDate - startDate;
-      const steps = duration / interval;
-      return Array.from({length: steps+1}, (v,i) => new Date(startDate.valueOf() + (interval * i)));
+    getDates() {
+      return [1,2,3,4,5,6,7,8,9,10];
     },
     fillData() {
       let dataset = []
-
-      for (let country in this.getCuratedTimeseries.points){
+      console.log(this.getCuratedTimeseries)
+      for (let country in this.getCuratedTimeseries.simple){
         let highlightedCountryConfig = {
           borderColor: this.random_rgba()
         }
@@ -121,16 +119,22 @@ export default {
           }
         }
 
+        console.log(country)
+        console.log(this.getCuratedTimeseries.simple[country])
+        console.log(trimEmptyCountryData(this.getCuratedTimeseries.simple[country]))
+
         let countryData = {
               label: country,
-              data: this.getCuratedTimeseries.points[country],
+              data: trimEmptyCountryData(this.getCuratedTimeseries.simple[country]),
               ...this.points,
               ...highlightedCountryConfig
         }
         dataset.push(countryData);
       }
 
-      let dateRange = this.getDates(this.startDate, this.endDate, this.dayInterval);
+      console.log(this.getCuratedTimeseries.labels)
+      let dateRange = this.getDates();
+      console.log(dateRange)
 
       this.datacollection = {
         labels: dateRange,

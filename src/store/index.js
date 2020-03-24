@@ -138,18 +138,25 @@ export default new Vuex.Store({
       // flatten array
 
       let flatObj = {};
+     let simpleSeries = {}
 
      let datesForHorizAxis =  state.timeseries['China'].map(time => time.date)
 
 
       for(let country in selectedCountriesObject) {
         flatObj[country] = selectedCountriesObject[country].map(time => {
+
           return {x: time.date, y: time.confirmed}
+        })
+
+        simpleSeries[country] = selectedCountriesObject[country].map(time => {
+          return  time.confirmed
         })
       }
       return {
         labels: datesForHorizAxis,
-        points: flatObj
+        points: flatObj,
+        simple : simpleSeries
       }
 
     }

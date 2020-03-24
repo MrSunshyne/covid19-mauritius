@@ -2,7 +2,7 @@
   <div class="py-8 px-8 md:px-0 bg-gray-900">
     <div class="container mx-auto">
       <h2 class="text-2xl leading-none font-bold text-center pb-8 text-white">
-        Overview
+        Mauritius Statistics
       </h2>
       <div class="chart w-full">
         <line-chart

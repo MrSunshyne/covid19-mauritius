@@ -2,6 +2,7 @@
   <div class="home">
     <OverviewSection></OverviewSection>
     <VirusProgression></VirusProgression>
+    <ChartFirstdays></ChartFirstdays>
     <NewCases></NewCases>
     <ChartAll></ChartAll>
     <ShareSection></ShareSection>
@@ -18,9 +19,11 @@ import CreditsSection from "../components/credits-section";
 import FaqSection from "../components/faq-section";
 import ShareSection from "../components/share-section";
 import ChartAll from "../components/chart-all";
+import ChartFirstdays from "../components/chart-firstdays";
 export default {
   name: "home",
   components: {
+    ChartFirstdays,
     ChartAll,
     VirusProgression,
     NewCases,

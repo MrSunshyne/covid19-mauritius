@@ -167,7 +167,7 @@ export function trimEmptyCountriesData(data) {
 
     for (let i = 0; i < countries.length; i++) {
         let country = countries[i];
-        output[country] = trimEmpty(data[country]);
+        output[country] = trimEmptyCountryData(data[country]);
     }
 
     return output;

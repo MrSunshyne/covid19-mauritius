@@ -2,7 +2,7 @@
   <div class="py-8 px-8 md:px-0 bg-gray-100">
     <div class="container mx-auto ">
       <h2 class="text-2xl leading-none font-bold text-center pb-8">
-        New Cases
+        Number of cases per day
       </h2>
       <div class="chart-container w-full relative" v-if="getStats">
         <bar-chart
