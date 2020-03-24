@@ -2,19 +2,29 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import timeago from "../helpers/timeago";
-import { extractData, fetchJson, groupById, getInt } from "@/helpers";
+import { extractData, fetchJson, groupById, getInt, pick } from "@/helpers";
 
 Vue.use(Vuex);
 
 export const SET_STATS = "SET_STATS";
+export const SET_TIMESTERIES = "SET_TIMESTERIES";
 export const SET_UPDATED = "SET_UPDATED";
 
 export const FETCH_STATS = "FETCH_STATS";
+export const FETCH_TIMESERIES = "FETCH_TIMESERIES";
 
 export default new Vuex.Store({
   state: {
     stats: [],
-    updated: null
+    updated: null,
+    timeseries: {
+      "China": [
+        {
+          date: ''
+        }
+      ]
+    },
+    selected_countries:['France', 'United Kingdom', 'Italy', 'Mauritius']
   },
 
   getters: {
@@ -106,8 +116,6 @@ export default new Vuex.Store({
 
       let i = state.stats.length - 1;
 
-      console.log(state.stats[i]);
-
       overview.active.amt += getInt(state.stats[i].active);
       overview.active.diff += getInt(state.stats[i].new);
 
@@ -121,12 +129,38 @@ export default new Vuex.Store({
       overview.total.diff = getInt(state.stats[i].new);
 
       return overview;
+    },
+    getTimeseries(state){
+      return state.timeseries
+    },
+    getCuratedTimeseries(state){
+     let selectedCountriesObject = pick(state.timeseries, state.selected_countries)
+      // flatten array
+
+      let flatObj = {};
+
+     let datesForHorizAxis =  state.timeseries['China'].map(time => time.date)
+
+
+      for(let country in selectedCountriesObject) {
+        flatObj[country] = selectedCountriesObject[country].map(time => {
+          return {x: time.date, y: time.confirmed}
+        })
+      }
+      return {
+        labels: datesForHorizAxis,
+        points: flatObj
+      }
+
     }
   },
 
   mutations: {
     [SET_STATS](state, stats) {
       state.stats = stats;
+    },
+    [SET_TIMESTERIES](state, payload) {
+      state.timeseries = payload;
     },
     [SET_UPDATED](state, updated) {
       state.updated = {
@@ -152,10 +186,19 @@ export default new Vuex.Store({
       }
 
       const stats = extractData(entry);
-      console.log(stats);
       commit(SET_STATS, stats);
       commit(SET_UPDATED, updated);
       return stats;
+    },
+    async [FETCH_TIMESERIES]({ commit }) {
+      let URL = 'https://pomber.github.io/covid19/timeseries.json'
+      try {
+        const result = await fetchJson(URL);
+        console.log(result);
+        commit(SET_TIMESTERIES, result);
+      } catch (error) {
+        throw new Error("Error should be caught by Vue global error handler." + error);
+      }
     }
   }
 });

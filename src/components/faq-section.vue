@@ -20,8 +20,10 @@
       </li>
       <li>
         <label>When was this page last updated?</label>
-        <p>Last updated: {{ getUpdated.ago }}</p>
-        <p>{{ getUpdated.value }}</p>
+        <template v-if="getUpdated">
+          <p>Last updated: {{ getUpdated.ago }}</p>
+          <p>{{ getUpdated.value }}</p>
+        </template>
       </li>
       <li>
         <label>Should I trust this page?</label>

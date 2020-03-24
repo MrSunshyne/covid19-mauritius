@@ -81,8 +81,8 @@ export default {
           {
             ...this.points,
             borderWidth: 4,
-            label: "Active Cases",
             borderColor: "#E44450",
+            label: "Active Cases",
             backgroundColor: "rgba(228,68,80,0.1)",
             data: this.getActive
           },

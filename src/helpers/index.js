@@ -55,6 +55,11 @@ export const getDay = function (str) {
     return days[day.getDay()];
 };
 
+export const pick = function(obj, keys) {
+    return keys.map(k => k in obj ? {[k]: obj[k]} : {})
+        .reduce((res, o) => Object.assign(res, o), {});
+}
+
 export async function fetchJson(url) {
     try {
         const response = await fetch(url);

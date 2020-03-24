@@ -12,7 +12,7 @@
 			<div class="value-wrapper flex items-baseline">
 				<div class="value text-gray-800 self-end text-3xl md:text-5xl leading-none font-bold pr-3">{{ value }}</div>
 				<div
-					class="diff leading-tight text-red-400 text-xs self-end font-bold"
+					class="diff leading-tight text-red-400 text-xs self-end font-bold pb-2"
 					:title="`${diff} new cases since yesterday`"
 					v-if="diffo.show"
 				>
