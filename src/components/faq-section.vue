@@ -20,28 +20,36 @@
       </li>
       <li>
         <label>When was this page last updated?</label>
-        <p>Last updated: {{ getUpdated.ago }}</p>
-        <p>{{ getUpdated.value }}</p>
+        <template v-if="getUpdated">
+          <p>Last updated: {{ getUpdated.ago }}</p>
+          <p>{{ getUpdated.value }}</p>
+        </template>
       </li>
       <li>
         <label>Should I trust this page?</label>
         <p>
+          All data about mauritius are updated after cross checking with official press releases on radio or TV. This page is not updated based on rumors.
           Kindly check websites of local news papers such as
           <a href="https://www.lexpress.mu">lexpress.mu</a>
           for trusted sources.
         </p>
       </li>
       <li>
-        <label>Is this updated automatically?</label>
+        <label>Is the data about Mauritius updated automatically?</label>
         <p>
-          No. I update the list whenever practically possible. The data comes
-          from a
+          No. The data about Mauritius' number of cases is updated whenever practically possible after the Press Conferences of the Goverment. 
+          The data comes from a
           <a
             href="https://docs.google.com/spreadsheets/d/1DhrU8lCWYS_VKKQ3QOYbLzrJgHioQGQp5qPnpSNcUU8/edit?usp=sharing"
             >Google Sheet</a
           >. Anyone can submit a PR to add new charts.
           <a href="https://github.com/MrSunshyne/covid19-mauritius">here</a>.
         </p>
+      </li>
+      <li>
+        <label>Is the data about other countries updated automatically?</label>
+        <p>Yes. The data for other countries is taken from this data sources: <a href="https://github.com/pomber/covid19/">Timeseries JSON on Github</a></p>
+
       </li>
       <li>
         <label>Why did you build this?</label>

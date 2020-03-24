@@ -2,7 +2,7 @@
   <div class="py-8 px-8 md:px-0 bg-gray-900">
     <div class="container mx-auto">
       <h2 class="text-2xl leading-none font-bold text-center pb-8 text-white">
-        Overview
+        Mauritius Statistics
       </h2>
       <div class="chart w-full">
         <line-chart
@@ -81,8 +81,8 @@ export default {
           {
             ...this.points,
             borderWidth: 4,
-            label: "Active Cases",
             borderColor: "#E44450",
+            label: "Active Cases",
             backgroundColor: "rgba(228,68,80,0.1)",
             data: this.getActive
           },
