@@ -1,8 +1,8 @@
 <template>
-  <div class="py-8 px-8 md:px-0 bg-green-900">
+  <div class="py-8 px-8 md:px-0 bg-teal-900">
     <div class="container mx-auto flex flex-col items-center">
       <h2 class="text-2xl leading-none font-bold text-center pb-8 text-white">
-        World COVID-19 Trends
+        Worldwide Trends
       </h2>
 
       <div class="controls-wrapper flex">
@@ -33,6 +33,7 @@
 import LineChart from "../helpers/LineChart";
 import BarChart from "../helpers/BarChart";
 import Datepicker from 'vuejs-datepicker';
+import {pickColor, random_rgba} from "../helpers";
 
 import { mapGetters, mapActions } from "vuex";
 export default {
@@ -97,10 +98,6 @@ export default {
   },
   methods: {
     ...mapActions(['FETCH_TIMESERIES']),
-    random_rgba() {
-      let o = Math.round, r = Math.random, s = 255;
-      return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
-    },
     getDates(startDate, endDate, interval) {
       const duration = endDate - startDate;
       const steps = duration / interval;
@@ -111,7 +108,7 @@ export default {
 
       for (let country in this.getCuratedTimeseries.points){
         let highlightedCountryConfig = {
-          borderColor: this.random_rgba()
+          borderColor: pickColor(country)
         }
 
         if (country === 'Mauritius') {

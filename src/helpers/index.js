@@ -147,18 +147,36 @@ export function getInt(raw, defaultValue = 0) {
 }
 
 export function trimEmptyCountryData(series) {
+    console.log(series)
     let i;
     for (i = 0; i < series.length; i++) {
         if (
-            series[i].confirmed !== 0
-            || series[i].deaths !== 0
-            || series[i].recovered !== 0
+            series[i] !== 0
         ) {
             break;
         }
     }
 
-    return series.slice(i + 1);
+    console.log(i)
+
+    return series.slice(i + 1, series.length);
+}
+
+export function random_rgba() {
+    let o = Math.round, r = Math.random, s = 255;
+    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + 1 + ')';
+}
+
+export function hashCode(str) {
+    let hash = 0;
+    for (var i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return hash;
+}
+
+export function pickColor(str) {
+    return `hsl(${hashCode(str) % 360}, 100%, 80%)`;
 }
 
 export function trimEmptyCountriesData(data) {

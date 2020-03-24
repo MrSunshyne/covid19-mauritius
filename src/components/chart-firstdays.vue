@@ -2,14 +2,14 @@
   <div class="py-8 px-8 md:px-0 bg-green-900">
     <div class="container mx-auto flex flex-col items-center">
       <h2 class="text-2xl leading-none font-bold text-center pb-8 text-white">
-        First Days of the Virus
+        First {{numberOfDays }} days of the COVID-19
       </h2>
 
-      <div class="controls-wrapper flex">
-          <datepicker type="date" class="mr-2 text-center" v-model="startDate" placeholder="Start Date"></datepicker>
-          <datepicker type="date" class="mr-2 text-center" v-model="endDate"  placeholder="End Date"></datepicker>
-        <button v-if="!getCuratedTimeseries.labels.length < 2" @click="FETCH_TIMESERIES" class="mx-auto btn p-2 bg-green-600 hover:bg-green-700 text-xs uppercase font-bold rounded text-white inline-block mb-8">Press to load data</button>
-        <div v-else>Data loaded succesfully</div>
+      <div class="controls-wrapper flex items-center mb-8">
+        <div class="text-white uppercase text-sm  mr-2">Choose a number</div>
+        <input class="h-10 w-20 text-center " type="number" placeholder="Number of days" v-model="numberOfDays">
+<!--        <button v-if="!getCuratedTimeseries.labels.length < 2" @click="FETCH_TIMESERIES" class="h-10 mx-auto btn p-2 bg-green-600 hover:bg-green-700 text-xs uppercase font-bold rounded text-white inline-block mb-8">Press to load data</button>-->
+<!--        <div v-else>Data loaded succesfully</div>-->
       </div>
 
 
@@ -22,7 +22,7 @@
       </div>
       <div>
         <p class="text-gray-500 text-center pt-5">
-          All countries from open source time series.
+          The first {{ numberOfDays }} days of the virus in these countries.
         </p>
       </div>
     </div>
@@ -33,7 +33,7 @@
 import LineChart from "../helpers/LineChart";
 import BarChart from "../helpers/BarChart";
 import Datepicker from 'vuejs-datepicker';
-import { trimEmptyCountryData, trimEmptyCountriesData } from '../helpers'
+import { trimEmptyCountryData, trimEmptyCountriesData, random_rgba, pickColor } from '../helpers'
 
 import { mapGetters, mapActions } from "vuex";
 export default {
@@ -48,6 +48,7 @@ export default {
       startDate: new Date('03/01/2020'),
       endDate: new Date(),
       dayInterval : 1000 * 60 * 60 * 24,
+      numberOfDays: 10,
       options: {
         responsive: true,
         maintainAspectRatio: false,
@@ -63,9 +64,8 @@ export default {
               gridLines: {
                 color: "rgba(255,255,255,0.1)"
               },
-                distribution: 'linear',
               ticks: {
-                // stepSize: 10,
+                stepSize: 10,
               }
             }
           ],
@@ -87,29 +87,17 @@ export default {
       }
     };
   },
-  watch: {
-    getCuratedTimeseries() {
-      this.fillData();
-    }
-  },
   mounted() {
-    this.FETCH_TIMESERIES();
+    // this.FETCH_TIMESERIES();
   },
   methods: {
     ...mapActions(['FETCH_TIMESERIES']),
-    random_rgba() {
-      let o = Math.round, r = Math.random, s = 255;
-      return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
-    },
-    getDates() {
-      return [1,2,3,4,5,6,7,8,9,10];
-    },
     fillData() {
       let dataset = []
       console.log(this.getCuratedTimeseries)
       for (let country in this.getCuratedTimeseries.simple){
         let highlightedCountryConfig = {
-          borderColor: this.random_rgba()
+          borderColor: pickColor(country)
         }
 
         if (country === 'Mauritius') {
@@ -121,11 +109,11 @@ export default {
 
         console.log(country)
         console.log(this.getCuratedTimeseries.simple[country])
-        console.log(trimEmptyCountryData(this.getCuratedTimeseries.simple[country]))
+        console.log(trimEmptyCountryData(this.getCuratedTimeseries.simple[country]).slice(0,this.numberOfDays))
 
         let countryData = {
               label: country,
-              data: trimEmptyCountryData(this.getCuratedTimeseries.simple[country]),
+              data: trimEmptyCountryData(this.getCuratedTimeseries.simple[country]).slice(0,this.numberOfDays),
               ...this.points,
               ...highlightedCountryConfig
         }
@@ -133,7 +121,7 @@ export default {
       }
 
       console.log(this.getCuratedTimeseries.labels)
-      let dateRange = this.getDates();
+      let dateRange = this.getDates;
       console.log(dateRange)
 
       this.datacollection = {
@@ -144,16 +132,27 @@ export default {
     },
   },
   computed: {
+    compoundProperty() {
+      // watch all these properties
+      return this.getCuratedTimeseries, this.numberOfDays, Date.now();
+    },
+    getDates() {
+      let result = [];
+      for (let i=0;i < this.numberOfDays;i++) {
+        result.push(`Day ${i + 1}`)
+      }
+      return result
+    },
     ...mapGetters([
-      "getStats",
-      "getTimestamps",
-      "getTotal",
-      "getTotalDeceased",
-      "getRecovered",
       "getActive",
       "getTimeseries",
       "getCuratedTimeseries"
     ])
-  }
+  },
+  watch: {
+    compoundProperty() {
+      this.fillData();
+    }
+  },
 };
 </script>

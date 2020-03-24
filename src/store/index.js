@@ -24,7 +24,7 @@ export default new Vuex.Store({
         }
       ]
     },
-    selected_countries:['France', 'United Kingdom', 'Italy', 'Mauritius']
+    selected_countries:[ 'Mauritius', 'France', 'United Kingdom', 'Italy', 'Thailand', 'Malaysia']
   },
 
   getters: {
