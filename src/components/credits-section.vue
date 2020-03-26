@@ -8,13 +8,15 @@
             <a href="https://sandeep.ramgolam.com">Sandeep Ramgolam</a> - Code
           </li>
           <li>
-            <a href="https://cedpoilly.me" target="_blank" rel="noopener"
-              >Cedric Poilly</a
-            >
+            <a href="https://cedpoilly.me" target="_blank" rel="noopener">Cedric Poilly</a>
             - Code
           </li>
-          <li><a href="#">Yusuf Satar</a> - Code</li>
-          <li><a href="#">Chittesh Sham</a> - Data Processing</li>
+          <li>
+            <a href="https://www.fluxy.net" target="_blank" rel="noopener">Yusuf Satar (fluxy)</a> - Code
+          </li>
+          <li>
+            <a href="#">Chittesh Sham</a> - Data Processing
+          </li>
         </ul>
       </div>
       <div class="sm:w-1/2">
@@ -27,9 +29,7 @@
             <a href="https://tailwindcss.com">TailwindCSS</a>
           </li>
           <li>
-            <a href="https://www.iconfinder.com/p/coronavirus-awareness-icons"
-              >Icons from IconFinder</a
-            >
+            <a href="https://www.iconfinder.com/p/coronavirus-awareness-icons">Icons from IconFinder</a>
           </li>
           <li>
             Hosted on
