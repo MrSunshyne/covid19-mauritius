@@ -1,16 +1,31 @@
 <template>
 	<div class="py-8 px-8 md:px-0 bg-green-900">
-		<div class="container mx-auto flex flex-col items-center">
-			<h2 class="text-2xl leading-none font-bold text-center pb-8 text-white">
+		<div class="container mx-auto flex flex-col items-center justify-center">
+			<h2 class="text-2xl leading-normal font-bold text-center pb-8 text-white">
 				First {{ numberOfDays }} days of the COVID-19
+
+				<button
+					v-if="!timer.isRunning"
+					class="ml-3 text-sm uppercase font-bold tracking-tight py-2 px-4 rounded-full bg-white text-black shadow"
+					@click="toggleTimer"
+				>
+					Play animation
+				</button>
+				<button
+					v-else
+					class="ml-3 text-sm uppercase font-bold tracking-tight py-2 px-4 rounded-full bg-white text-black shadow"
+					@click="timer.isRunning = false"
+				>
+					Pause
+				</button>
 			</h2>
 
 			<div class="w-10/12 md:w-1/3 py-3">
 				<vue-range-slider
 					ref="slider"
 					v-model="numberOfDays"
-					step="1"
-					min="1"
+					:step="1"
+					:min="1"
 					:max="getCuratedTimeseries.simple.length"
 					:bg-style="sliderOptions.bgStyle"
 					:tooltip-style="sliderOptions.tooltipStyle"
@@ -118,6 +133,10 @@
 					borderWidth: 1,
 					datasetStrokeWidth: 1,
 				},
+				timer: {
+					isRunning: false,
+					interval: undefined, // store the interval here
+				},
 			};
 		},
 		mounted() {
@@ -158,6 +177,25 @@
 					labels: dateRange,
 					datasets: dataset,
 				};
+			},
+			toggleTimer() {
+				if (this.timer.isRunning) {
+					clearInterval(this.timer.interval);
+					console.log("timer stops");
+				} else {
+					this.numberOfDays = 1;
+					this.timer.interval = setInterval(this.incrementTime, 1000);
+					console.log("timer starts");
+				}
+				this.timer.isRunning = !this.timer.isRunning; // better to read
+			},
+			incrementTime() {
+				if (!this.timer.isRunning) {
+					clearInterval(this.timer.interval);
+					console.log("timer stops");
+				} else {
+					this.numberOfDays += 1;
+				}
 			},
 		},
 		computed: {
