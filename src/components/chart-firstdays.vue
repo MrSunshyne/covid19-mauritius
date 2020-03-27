@@ -6,15 +6,28 @@
 			</h2>
 
 			<div class="controls-wrapper flex items-center mb-8">
-				<div class="text-white uppercase text-sm  mr-2">Choose a number</div>
-				<input
-					class="h-10 w-20 text-center "
-					placeholder="Number of days"
-					type="number"
-					v-model="numberOfDays"
-				/>
+				<div class="text-white uppercase text-sm  mr-2">
+					Change the number of days
+				</div>
+<!--				<input-->
+<!--					class="h-10 w-20 text-center "-->
+<!--					placeholder="Number of days"-->
+<!--					type="number"-->
+<!--					v-model="numberOfDays"-->
+<!--				/>-->
+
 				<!--        <button v-if="!getCuratedTimeseries.labels.length < 2" @click="FETCH_TIMESERIES" class="h-10 mx-auto btn p-2 bg-green-600 hover:bg-green-700 text-xs uppercase font-bold rounded text-white inline-block mb-8">Press to load data</button>-->
 				<!--        <div v-else>Data loaded succesfully</div>-->
+			</div>
+
+			<div class="w-48 py-3">
+				<vue-range-slider
+						ref="slider"
+						v-model="numberOfDays"
+						step="1"
+						min="1"
+						:max="getCuratedTimeseries.simple.length"
+				></vue-range-slider>
 			</div>
 
 			<div class="chart w-full">
@@ -26,7 +39,7 @@
 			</div>
 			<div>
 				<p class="text-gray-500 text-center pt-5">
-					The first {{ numberOfDays }} days of the virus in these countries.
+					The first {{ numberOfDays }} days of the virus in these countries. <span class="">Source : <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a></span>
 				</p>
 			</div>
 		</div>
@@ -40,12 +53,14 @@
 	import {pickColor, trimEmptyCountryData} from "../helpers";
 
 	import {mapActions, mapGetters} from "vuex";
-
+	import "vue-range-component/dist/vue-range-slider.css";
+	import VueRangeSlider from "vue-range-component";
 	export default {
 		components: {
 			LineChart,
 			BarChart,
 			Datepicker,
+			VueRangeSlider,
 		},
 		data() {
 			return {
@@ -98,26 +113,19 @@
 			...mapActions(["FETCH_TIMESERIES"]),
 			fillData() {
 				let dataset = [];
-				console.log(this.getCuratedTimeseries);
+
 				for (let country in this.getCuratedTimeseries.simple) {
 					let highlightedCountryConfig = {
 						borderColor: pickColor(country),
 					};
 
+					// Highlight Mauritius in red
 					if (country === "Mauritius") {
 						highlightedCountryConfig = {
 							borderWidth: 4,
 							borderColor: "#E44450",
 						};
 					}
-
-					console.log(country);
-					console.log(this.getCuratedTimeseries.simple[country]);
-					console.log(
-						trimEmptyCountryData(
-							this.getCuratedTimeseries.simple[country]
-						).slice(0, this.numberOfDays)
-					);
 
 					let countryData = {
 						label: country,
@@ -130,9 +138,7 @@
 					dataset.push(countryData);
 				}
 
-				console.log(this.getCuratedTimeseries.labels);
 				let dateRange = this.getDates;
-				console.log(dateRange);
 
 				this.datacollection = {
 					labels: dateRange,
