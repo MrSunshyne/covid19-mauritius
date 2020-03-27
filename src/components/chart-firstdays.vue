@@ -20,24 +20,24 @@
 				</button>
 			</h2>
 
-			<div class="w-10/12 md:w-1/3 py-3">
-				<vue-range-slider
-					ref="slider"
-					v-model="numberOfDays"
-					:step="1"
-					:min="1"
-					:max="getCuratedTimeseries.simple.length"
-					:bg-style="sliderOptions.bgStyle"
-					:tooltip-style="sliderOptions.tooltipStyle"
-					:process-style="sliderOptions.processStyle"
-				></vue-range-slider>
-			</div>
+<!--			<div class="w-10/12 md:w-1/3 py-3">-->
+<!--				<vue-range-slider-->
+<!--					ref="slider"-->
+<!--					v-model="numberOfDays"-->
+<!--					:step="1"-->
+<!--					:min="1"-->
+<!--					:max="getCuratedTimeseries.simple.length"-->
+<!--					:bg-style="sliderOptions.bgStyle"-->
+<!--					:tooltip-style="sliderOptions.tooltipStyle"-->
+<!--					:process-style="sliderOptions.processStyle"-->
+<!--				></vue-range-slider>-->
+<!--			</div>-->
 
-			<div class="controls-wrapper flex items-center mb-8">
-				<div class="text-white uppercase text-sm  mr-2">
-					Change the number of days
-				</div>
-			</div>
+<!--			<div class="controls-wrapper flex items-center mb-8">-->
+<!--				<div class="text-white uppercase text-sm  mr-2">-->
+<!--					Change the number of days-->
+<!--				</div>-->
+<!--			</div>-->
 
 			<div class="chart w-full">
 				<line-chart
@@ -64,18 +64,18 @@
 <script>
 	import LineChart from "../helpers/LineChart";
 	import BarChart from "../helpers/BarChart";
-	import Datepicker from "vuejs-datepicker";
+	// import Datepicker from "vuejs-datepicker";
 	import {pickColor, trimEmptyCountryData} from "../helpers";
 
 	import {mapActions, mapGetters} from "vuex";
-	import "vue-range-component/dist/vue-range-slider.css";
-	import VueRangeSlider from "vue-range-component";
+	// import "vue-range-component/dist/vue-range-slider.css";
+	// import VueRangeSlider from "vue-range-component";
 	export default {
 		components: {
 			LineChart,
 			BarChart,
-			Datepicker,
-			VueRangeSlider,
+			// Datepicker,
+			// VueRangeSlider,
 		},
 		data() {
 			return {

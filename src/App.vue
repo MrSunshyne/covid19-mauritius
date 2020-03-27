@@ -1,5 +1,5 @@
 <template>
-	<div class="flex  flex-col bg-gray-200">
+	<div class="bg-gray-200">
 		<main-menu></main-menu>
 		<router-view  />
 		<footer-section />

@@ -9,10 +9,7 @@
 		<ul class="flex mr-3">
 			<li>
 				Last updated:
-				<span
-					:title="getUpdated.value"
-					v-if="getUpdated"
-				>
+				<span :title="getUpdated.value" v-if="getUpdated">
 					{{ getUpdated.ago }}</span
 				>
 				<span v-else>loading..</span>
