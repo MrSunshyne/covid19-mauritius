@@ -1,7 +1,7 @@
 <template>
-	<div class="flex min-h-screen flex-col bg-gray-200">
+	<div class="flex  flex-col bg-gray-200">
 		<main-menu></main-menu>
-		<router-view class="flex-grow" />
+		<router-view  />
 		<footer-section />
 	</div>
 </template>
