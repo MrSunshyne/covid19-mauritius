@@ -5,14 +5,16 @@
 				First {{ numberOfDays }} days of the COVID-19
 			</h2>
 
-			<div class="w-1/3 py-3">
+			<div class="w-10/12 md:w-1/3 py-3">
 				<vue-range-slider
-						ref="slider"
-						v-model="numberOfDays"
-						step="1"
-						min="1"
-						:max="getCuratedTimeseries.simple.length"
-						:bg-style="sliderOptions.bgStyle" :tooltip-style="sliderOptions.tooltipStyle" :process-style="sliderOptions.processStyle"
+					ref="slider"
+					v-model="numberOfDays"
+					step="1"
+					min="1"
+					:max="getCuratedTimeseries.simple.length"
+					:bg-style="sliderOptions.bgStyle"
+					:tooltip-style="sliderOptions.tooltipStyle"
+					:process-style="sliderOptions.processStyle"
 				></vue-range-slider>
 			</div>
 
@@ -20,15 +22,6 @@
 				<div class="text-white uppercase text-sm  mr-2">
 					Change the number of days
 				</div>
-				<!--				<input-->
-				<!--					class="h-10 w-20 text-center "-->
-				<!--					placeholder="Number of days"-->
-				<!--					type="number"-->
-				<!--					v-model="numberOfDays"-->
-				<!--				/>-->
-
-				<!--        <button v-if="!getCuratedTimeseries.labels.length < 2" @click="FETCH_TIMESERIES" class="h-10 mx-auto btn p-2 bg-green-600 hover:bg-green-700 text-xs uppercase font-bold rounded text-white inline-block mb-8">Press to load data</button>-->
-				<!--        <div v-else>Data loaded succesfully</div>-->
 			</div>
 
 			<div class="chart w-full">
@@ -40,7 +33,13 @@
 			</div>
 			<div>
 				<p class="text-gray-200 text-center pt-5">
-					The first {{ numberOfDays }} days of the virus in these countries. <span class="">Source : <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a></span>
+					The first {{ numberOfDays }} days of the virus in these countries.
+					<span class=""
+						>Source :
+						<a href="https://github.com/CSSEGISandData/COVID-19"
+							>Johns Hopkins CSSE</a
+						></span
+					>
 				</p>
 			</div>
 		</div>
@@ -71,18 +70,18 @@
 				dayInterval: 1000 * 60 * 60 * 24,
 				numberOfDays: 10,
 				sliderOptions: {
-					bgStyle : {
-						backgroundColor: '#fff',
-						boxShadow: 'inset 0.5px 0.5px 3px 1px rgba(0,0,0,.36)'
+					bgStyle: {
+						backgroundColor: "#fff",
+						boxShadow: "inset 0.5px 0.5px 3px 1px rgba(0,0,0,.36)",
 					},
-					tooltipStyle : {
-						backgroundColor: '#fff',
-						borderColor: '#fff',
-						color: "#000"
+					tooltipStyle: {
+						backgroundColor: "#fff",
+						borderColor: "#fff",
+						color: "#000",
 					},
-					processStyle : {
-						backgroundColor: '#E44450'
-					}
+					processStyle: {
+						backgroundColor: "#E44450",
+					},
 				},
 				options: {
 					responsive: true,
