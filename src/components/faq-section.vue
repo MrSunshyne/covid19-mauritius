@@ -5,6 +5,13 @@
 			class="faq px-8 sm:px-0 grid py-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
 		>
 			<li>
+				<label>What is the source ?</label>
+				<p>
+					Statistics on Mauritius is taken from <a target="_blank" href="https://besafemoris.mu/stats/">BeSafeMoris</a>, the official news source announced by the Mauritian Government.
+					Statistics on all other countries come from <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">John Hopkins CSSE.</a>
+				</p>
+			</li>
+			<li>
 				<label>What is the difference between Active Cases and Total?</label>
 				<p>
 					Active cases are the last reported number of people who have the
@@ -13,47 +20,32 @@
 				</p>
 			</li>
 			<li>
-				<label>What is the source ?</label>
+				<label>Is this page official?</label>
 				<p>
-					Local newspapers and radio stations.
-				</p>
-			</li>
-			<li>
-				<label>When was this page last updated?</label>
-				<template v-if="getUpdated">
-					<p>Last updated: {{ getUpdated.ago }}</p>
-					<p>{{ getUpdated.value }}</p>
-				</template>
-			</li>
-			<li>
-				<label>Should I trust this page?</label>
-				<p>
-					All data about mauritius are updated after cross checking with
-					official press releases on radio or TV. This page is not updated based
-					on rumors. Kindly check websites of local news papers such as
-					<a href="https://www.lexpress.mu">lexpress.mu</a>
-					for trusted sources.
+					No. This is a community effort to visualize the large flux of data coming our way.
+					However all data are taken from official and trusted sources i.e BeSafeMoris and John Hopkins CSSE.
+
 				</p>
 			</li>
 			<li>
 				<label>Is the data about Mauritius updated automatically?</label>
 				<p>
 					No. The data about Mauritius' number of cases is updated whenever
-					practically possible after the Press Conferences of the Goverment. The
-					data comes from a
+					practically possible after the Press Conferences of the Government and it has been updated on BeSafeMoris. The
+					backend is a simple
 					<a
+							target="_blank"
 						href="https://docs.google.com/spreadsheets/d/1DhrU8lCWYS_VKKQ3QOYbLzrJgHioQGQp5qPnpSNcUU8/edit?usp=sharing"
 						>Google Sheet</a
-					>. Anyone can submit a PR to add new charts.
-					<a href="https://github.com/MrSunshyne/covid19-mauritius">here</a>.
+					>.
 				</p>
 			</li>
 			<li>
 				<label>Is the data about other countries updated automatically?</label>
 				<p>
-					Yes. The data for other countries is taken from this data sources:
-					<a href="https://github.com/pomber/covid19/"
-						>Timeseries JSON on Github</a
+					Yes. The data for other countries is taken from this data source:
+					<a target="_blank" href="https://github.com/pomber/covid19/"
+						>John Hopkins CSSE data converted to JSON</a
 					>
 				</p>
 			</li>
@@ -61,6 +53,12 @@
 				<label>Why did you build this?</label>
 				<p>
 					To have a simple page where everyone can check the latest statistics.
+				</p>
+			</li>
+			<li>
+				<label>Why does this exist when there is an official BeSafeMoris website ?</label>
+				<p>
+					Please use the official app for faster official updates. On this page I will add additional graphic analysis based on the same official data showing trends how Mauritius is doing compared to other countries.
 				</p>
 			</li>
 			<li>
@@ -76,6 +74,11 @@
 					>lam.com
 				</p>
 			</li>
+			<li>
+				<label>Can I contribute to this project?</label>
+				<p>Yes please. This project is open source anyone can submit a PR to add new charts or other suggestions
+					<a href="https://github.com/MrSunshyne/covid19-mauritius">here</a>.</p>
+			</li>
 		</ul>
 	</div>
 </template>
@@ -90,12 +93,12 @@
 	};
 </script>
 
-<style>
+<style lang="scss" scoped>
 	label {
 		@apply font-bold my-4;
 	}
 
 	a {
-		@apply font-bold;
+		@apply text-blue-600;
 	}
 </style>
