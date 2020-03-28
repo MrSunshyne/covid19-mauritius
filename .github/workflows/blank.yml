@@ -1,0 +1,26 @@
+# Fetcher fetches latest cases in Mauritius from a trustworthy API and commits it to cases.json
+
+name: Fetcher
+
+on:
+  schedule:
+    - cron: '0 */1 * * *' # Every hour
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Fetch latest cases from API and place them into cases.json
+      run: |
+        curl -sb -H "Accept: application/json" 'https://besafemoris.mu/wp-json/wp/v2/getLocalCases' > public/data/cases.json
+    - name: Commit cases.json
+      run: |
+        git config --local user.email "actioner@github.com"
+        git config --local user.name "GitHub Actioner"
+        git add public/data/cases.json
+        git commit -m "APIs data updated" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
