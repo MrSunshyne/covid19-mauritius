@@ -19,7 +19,7 @@ jobs:
         git config --local user.email "actioner@github.com"
         git config --local user.name "GitHub Actioner"
         git add public/data/cases.json
-        git commit -m "APIs data updated" -a
+        git commit -m "APIs data has been updated" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
