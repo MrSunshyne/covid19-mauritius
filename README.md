@@ -1,6 +1,6 @@
 # COVID-19 Mauritius
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Statistics about the cases of COVID-19 in Mauritius
@@ -22,6 +22,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/cedpoilly"><img src="https://avatars3.githubusercontent.com/u/11003819?v=4" width="100px;" alt=""/><br /><sub><b>Cedric</b></sub></a><br /><a href="https://github.com/MrSunshyne/covid19-mauritius/commits?author=cedpoilly" title="Code">💻</a> <a href="https://github.com/MrSunshyne/covid19-mauritius/issues?q=author%3Acedpoilly" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://paperboat.io"><img src="https://avatars3.githubusercontent.com/u/3250906?v=4" width="100px;" alt=""/><br /><sub><b>Rikesh Ramlochund</b></sub></a><br /><a href="#content-rrikesh" title="Content">🖋</a></td>
     <td align="center"><a href="https://sandeep.ramgolam.com"><img src="https://avatars1.githubusercontent.com/u/1721611?v=4" width="100px;" alt=""/><br /><sub><b>Sandeep Ramgolam</b></sub></a><br /><a href="https://github.com/MrSunshyne/covid19-mauritius/commits?author=MrSunshyne" title="Code">💻</a> <a href="#design-MrSunshyne" title="Design">🎨</a> <a href="#maintenance-MrSunshyne" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/isitlunchtimeyet"><img src="https://avatars1.githubusercontent.com/u/36814895?v=4" width="100px;" alt=""/><br /><sub><b>isitlunchtimeyet</b></sub></a><br /><a href="#content-isitlunchtimeyet" title="Content">🖋</a></td>
   </tr>
 </table>
 
