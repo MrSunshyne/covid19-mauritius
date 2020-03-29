@@ -23,6 +23,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "cedpoilly",
+      "name": "Cedric",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/11003819?v=4",
+      "profile": "https://github.com/cedpoilly",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
