@@ -33,6 +33,15 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "rrikesh",
+      "name": "Rikesh Ramlochund",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3250906?v=4",
+      "profile": "https://paperboat.io",
+      "contributions": [
+        "content"
+      ]
     }
   ],
   "contributorsPerLine": 7,
