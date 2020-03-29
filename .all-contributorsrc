@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "JulesMike",
+      "name": "Jules Michael",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/38979769?v=4",
+      "profile": "https://gophers.mu",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "covid19-mauritius",
+  "projectOwner": "MrSunshyne",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
