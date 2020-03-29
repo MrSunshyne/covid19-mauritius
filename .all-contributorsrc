@@ -14,6 +14,15 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "fluxynet",
+      "name": "Yusuf Satar",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/949842?v=4",
+      "profile": "https://fluxy.net",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
