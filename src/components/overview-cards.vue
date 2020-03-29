@@ -37,10 +37,6 @@
 				>icon
 			</StatCard>
 
-			<pre>
-				{{ vstats }}
-			</pre>
-
 		</div>
 	</div>
 </template>

@@ -125,6 +125,25 @@ export default new Vuex.Store({
 				},
 			};
 
+			// Fetch Verified Stats
+
+			if (state.verified_stats.length > 1) {
+				let latestStat = state.verified_stats[0]
+
+				overview.active.amt = getInt(latestStat.total_cases) - getInt(latestStat.death);
+				overview.active.diff = getInt(latestStat.today_cases);
+
+				overview.recovered.amt = getInt(latestStat.recovered)
+
+				overview.deceased.amt = getInt(latestStat.death)
+				overview.deceased.diff = getInt(latestStat.today_death)
+
+				overview.total.amt = getInt(latestStat.total_cases);
+				overview.total.diff = getInt(latestStat.today_cases);
+
+				return overview
+			}
+
 			if (state.stats.length === 0) {
 				return overview;
 			}
@@ -194,8 +213,8 @@ export default new Vuex.Store({
 		},
 		[SET_UPDATED](state, updated) {
 			state.updated = {
-				value: updated.$t,
-				ago: timeago(updated.$t),
+				value: updated,
+				ago: updated.split(' ')[0]
 			};
 		},
 	},
@@ -219,7 +238,7 @@ export default new Vuex.Store({
 
 			const stats = extractData(entry);
 			commit(SET_STATS, stats);
-			commit(SET_UPDATED, updated);
+			// commit(SET_UPDATED, updated);
 			return stats;
 		},
 		async [FETCH_VERIFIED_STATS]({commit}) {
@@ -227,6 +246,8 @@ export default new Vuex.Store({
 			try {
 				const result = await fetchJson(URL);
 				commit(SET_VERIFIED_STATS, result);
+				commit(SET_UPDATED, result[0].case_date);
+
 			} catch (error) {
 				throw new Error(
 					"Error should be caught by Vue global error handler." + error
