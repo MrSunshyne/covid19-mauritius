@@ -153,15 +153,12 @@ export function getInt(raw, defaultValue = 0) {
 }
 
 export function trimEmptyCountryData(series) {
-	console.log(series);
 	let i;
 	for (i = 0; i < series.length; i++) {
 		if (series[i] !== 0) {
 			break;
 		}
 	}
-
-	console.log(i);
 
 	return series.slice(i + 1, series.length);
 }

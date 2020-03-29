@@ -36,21 +36,29 @@
 				:value="overview.total.amt"
 				>icon
 			</StatCard>
+
 		</div>
 	</div>
 </template>
 
 <script>
 	import StatCard from "./stat-card";
-	import {mapGetters} from "vuex";
+	import {mapGetters, mapActions} from "vuex";
 
 	export default {
+		mounted() {
+			this.FETCH_VERIFIED_STATS()
+		},
+		methods:{
+			...mapActions(['FETCH_VERIFIED_STATS'])
+		},
 		components: {
 			StatCard,
 		},
 		computed: {
 			...mapGetters({
 				overview: "getOverview",
+				vstats: 'getVerifiedStats'
 			}),
 		},
 	};
