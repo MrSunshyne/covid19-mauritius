@@ -4,23 +4,31 @@ name: Fetcher
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # Every hour
+    - cron: '*/5 * * * *' # Every 5 minutes
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'public/data/.manual-trigger' # Commit to this file to trigger action
 
 jobs:
-  build:
+  fetchcommit:
     runs-on: ubuntu-latest
+    timeout-minutes: 1
     steps:
     - uses: actions/checkout@master
     - name: Fetch latest cases from API and place them into cases.json
       run: |
-        curl -sb -H "Accept: application/json" 'https://besafemoris.mu/wp-json/wp/v2/getLocalCases' > public/data/cases.json
+        curl -f -H "Accept: application/json" 'https://besafemoris.mu/wp-json/wp/v2/getLocalCases' > public/data/cases.json
     - name: Commit cases.json
+      continue-on-error: true
       run: |
         git config --local user.email "actioner@github.com"
         git config --local user.name "GitHub Actioner"
         git add public/data/cases.json
         git commit -m "APIs data has been updated" -a
     - name: Push changes
+      continue-on-error: true
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
