@@ -20,25 +20,6 @@
 				</button>
 			</h2>
 
-<!--			<div class="w-10/12 md:w-1/3 py-3">-->
-<!--				<vue-range-slider-->
-<!--					ref="slider"-->
-<!--					v-model="numberOfDays"-->
-<!--					:step="1"-->
-<!--					:min="1"-->
-<!--					:max="getCuratedTimeseries.simple.length"-->
-<!--					:bg-style="sliderOptions.bgStyle"-->
-<!--					:tooltip-style="sliderOptions.tooltipStyle"-->
-<!--					:process-style="sliderOptions.processStyle"-->
-<!--				></vue-range-slider>-->
-<!--			</div>-->
-
-<!--			<div class="controls-wrapper flex items-center mb-8">-->
-<!--				<div class="text-white uppercase text-sm  mr-2">-->
-<!--					Change the number of days-->
-<!--				</div>-->
-<!--			</div>-->
-
 			<div class="chart w-full">
 				<line-chart
 					:chart-data="datacollection"
@@ -64,18 +45,14 @@
 <script>
 	import LineChart from "../helpers/LineChart";
 	import BarChart from "../helpers/BarChart";
-	// import Datepicker from "vuejs-datepicker";
 	import {pickColor, trimEmptyCountryData} from "../helpers";
-
 	import {mapActions, mapGetters} from "vuex";
-	// import "vue-range-component/dist/vue-range-slider.css";
-	// import VueRangeSlider from "vue-range-component";
+	import {FETCH_VERIFIED_STATS} from "../store";
+
 	export default {
 		components: {
 			LineChart,
 			BarChart,
-			// Datepicker,
-			// VueRangeSlider,
 		},
 		data() {
 			return {
@@ -143,7 +120,7 @@
 			this.FETCH_TIMESERIES();
 		},
 		methods: {
-			...mapActions(["FETCH_TIMESERIES"]),
+			...mapActions(["FETCH_TIMESERIES", 'FETCH_VERIFIED_STATS']),
 			fillData() {
 				let dataset = [];
 
@@ -181,18 +158,20 @@
 			toggleTimer() {
 				if (this.timer.isRunning) {
 					clearInterval(this.timer.interval);
-					console.log("timer stops");
 				} else {
-					this.numberOfDays = 1;
+					// this.numberOfDays = 1;
+
+					while (this.numberOfDays != 1) {
+						this.numberOfDays--;
+					}
+
 					this.timer.interval = setInterval(this.incrementTime, 1000);
-					console.log("timer starts");
 				}
 				this.timer.isRunning = !this.timer.isRunning; // better to read
 			},
 			incrementTime() {
 				if (!this.timer.isRunning) {
 					clearInterval(this.timer.interval);
-					console.log("timer stops");
 				} else {
 					this.numberOfDays += 1;
 				}
@@ -210,7 +189,7 @@
 				}
 				return result;
 			},
-			...mapGetters(["getActive", "getTimeseries", "getCuratedTimeseries"]),
+			...mapGetters(["getActive", "getTimeseries", "getCuratedTimeseries", "getVerifiedStats"]),
 		},
 		watch: {
 			compoundProperty() {

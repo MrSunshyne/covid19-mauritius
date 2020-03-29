@@ -7,15 +7,18 @@ import {extractData, fetchJson, getInt, pick} from "@/helpers";
 Vue.use(Vuex);
 
 export const SET_STATS = "SET_STATS";
+export const SET_VERIFIED_STATS = "SET_VERIFIED_STATS";
 export const SET_TIMESTERIES = "SET_TIMESTERIES";
 export const SET_UPDATED = "SET_UPDATED";
 
 export const FETCH_STATS = "FETCH_STATS";
+export const FETCH_VERIFIED_STATS = "FETCH_VERIFIED_STATS";
 export const FETCH_TIMESERIES = "FETCH_TIMESERIES";
 
 export default new Vuex.Store({
 	state: {
 		stats: [],
+		verified_stats: [],
 		updated: null,
 		timeseries: {
 			China: [
@@ -42,6 +45,9 @@ export default new Vuex.Store({
 		},
 		getStats(state) {
 			return state.stats;
+		},
+		getVerifiedStats(state){
+			return state.verified_stats
 		},
 		getTimestamps(state) {
 			if (state.stats.length > 0) {
@@ -177,8 +183,11 @@ export default new Vuex.Store({
 	},
 
 	mutations: {
-		[SET_STATS](state, stats) {
-			state.stats = stats;
+		[SET_STATS](state, payload) {
+			state.stats = payload;
+		},
+		[SET_VERIFIED_STATS](state, payload) {
+			state.verified_stats = payload;
 		},
 		[SET_TIMESTERIES](state, payload) {
 			state.timeseries = payload;
@@ -213,11 +222,21 @@ export default new Vuex.Store({
 			commit(SET_UPDATED, updated);
 			return stats;
 		},
+		async [FETCH_VERIFIED_STATS]({commit}) {
+			let URL = "/data/cases.json";
+			try {
+				const result = await fetchJson(URL);
+				commit(SET_VERIFIED_STATS, result);
+			} catch (error) {
+				throw new Error(
+					"Error should be caught by Vue global error handler." + error
+				);
+			}
+		},
 		async [FETCH_TIMESERIES]({commit}) {
 			let URL = "https://pomber.github.io/covid19/timeseries.json";
 			try {
 				const result = await fetchJson(URL);
-				console.log(result);
 				commit(SET_TIMESTERIES, result);
 			} catch (error) {
 				throw new Error(
