@@ -5,27 +5,35 @@
 				Worldwide Trends
 			</h2>
 
-			<div class="controls-wrapper flex">
-				<datepicker
-					class="mr-2 text-center"
-					placeholder="Start Date"
-					type="date"
-					v-model="startDate"
-				></datepicker>
-				<datepicker
-					class="mr-2 text-center"
-					placeholder="End Date"
-					type="date"
-					v-model="endDate"
-				></datepicker>
-				<button
-					@click="FETCH_TIMESERIES"
-					class="mx-auto btn p-2 bg-green-600 hover:bg-green-700 text-xs uppercase font-bold rounded text-white inline-block mb-8"
-					v-if="!getCuratedTimeseries.labels.length < 2"
-				>
-					Press to load data
-				</button>
-				<div v-else>Data loaded succesfully</div>
+			<div class="controls-wrapper grid gap-4 sm:flex pb-8 text-white ">
+				<div class="flex">
+					<label for="" class="font-bold mr-2 text-sm uppercase">From: </label>
+					<datepicker
+						class="mr-2 text-center text-black"
+						placeholder="Start Date"
+						type="date"
+						v-model="startDate"
+						:disabled-dates="{from: new Date()}"
+					></datepicker>
+				</div>
+
+				<div class="flex">
+					<label for="" class="font-bold mr-2 text-sm uppercase">To: </label>
+					<datepicker
+						class="mr-2 text-center text-black"
+						placeholder="End Date"
+						type="date"
+						v-model="endDate"
+						:disabled-dates="{from: new Date()}"
+					></datepicker>
+				</div>
+				<!--				<button-->
+				<!--					@click="toggleChartYAxisType"-->
+				<!--					class="mx-auto btn p-2 bg-green-600 hover:bg-green-700 text-xs uppercase font-bold rounded text-white inline-block mb-8"-->
+				<!--				>-->
+				<!--					Chart type-->
+				<!--				</button>-->
+				<!--				<div v-else>Data loaded succesfully</div>-->
 			</div>
 
 			<div class="chart w-full">
@@ -36,8 +44,14 @@
 				></line-chart>
 			</div>
 			<div>
-				<p class="text-gray-500 text-center pt-5">
-					All countries from open source time series.
+				<p class="text-gray-200 text-center pt-5">
+					Mauritius on the global (linear) scale with selected countries
+					<span class=""
+						>Source :
+						<a href="https://github.com/CSSEGISandData/COVID-19"
+							>Johns Hopkins CSSE</a
+						></span
+					>
 				</p>
 			</div>
 		</div>
@@ -79,10 +93,7 @@
 								gridLines: {
 									color: "rgba(255,255,255,0.1)",
 								},
-								distribution: "linear",
-								ticks: {
-									// stepSize: 10,
-								},
+								type: "linear",
 							},
 						],
 						xAxes: [
@@ -104,12 +115,34 @@
 			};
 		},
 		watch: {
-			getCuratedTimeseries() {
+			compoundProperty() {
 				this.fillData();
 			},
 		},
 		mounted() {
 			this.FETCH_TIMESERIES();
+		},
+		computed: {
+			compoundProperty() {
+				// watch all these properties
+				return (
+					this.getCuratedTimeseries,
+					this.startDate,
+					this.endDate,
+					this.chartType,
+					Date.now()
+				);
+			},
+			...mapGetters([
+				"getStats",
+				"getTimestamps",
+				"getTotal",
+				"getTotalDeceased",
+				"getRecovered",
+				"getActive",
+				"getTimeseries",
+				"getCuratedTimeseries",
+			]),
 		},
 		methods: {
 			...mapActions(["FETCH_TIMESERIES"]),
@@ -120,6 +153,13 @@
 					{length: steps + 1},
 					(v, i) => new Date(startDate.valueOf() + interval * i)
 				);
+			},
+			toggleChartYAxisType() {
+				if (this.options.scales.yAxes[0].type === "linear") {
+					this.options.scales.yAxes[0].type = "logarithmic";
+				} else {
+					this.options.scales.yAxes[0].type = "linear";
+				}
 			},
 			fillData() {
 				let dataset = [];
@@ -156,18 +196,6 @@
 					datasets: dataset,
 				};
 			},
-		},
-		computed: {
-			...mapGetters([
-				"getStats",
-				"getTimestamps",
-				"getTotal",
-				"getTotalDeceased",
-				"getRecovered",
-				"getActive",
-				"getTimeseries",
-				"getCuratedTimeseries",
-			]),
 		},
 	};
 </script>

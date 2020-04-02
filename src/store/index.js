@@ -34,7 +34,7 @@ export default new Vuex.Store({
 			"Korea, South",
 			"United Kingdom",
 			"Italy",
-			"Thailand",
+			"US",
 			"Malaysia",
 			"South Africa",
 			"Australia",

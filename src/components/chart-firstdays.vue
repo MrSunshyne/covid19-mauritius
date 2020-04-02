@@ -60,7 +60,7 @@
 				startDate: new Date("03/01/2020"),
 				endDate: new Date(),
 				dayInterval: 1000 * 60 * 60 * 24,
-				numberOfDays: 10,
+				numberOfDays: 15,
 				sliderOptions: {
 					bgStyle: {
 						backgroundColor: "#fff",
