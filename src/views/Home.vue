@@ -13,7 +13,7 @@
 
 <script>
 	import OverviewSection from "../components/overview-cards";
-	import NewCases from "../components/chart-new-cases";
+	import NewCases from "../components/chart-cases-daily";
 	import VirusProgression from "../components/chart-overview";
 	import CreditsSection from "../components/credits-section";
 	import FaqSection from "../components/faq-section";
@@ -35,6 +35,7 @@
 		},
 		created() {
 			this.$store.dispatch("FETCH_STATS");
+			this.$store.dispatch("FETCH_VERIFIED_STATS");
 		},
 	};
 </script>
