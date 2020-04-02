@@ -31,6 +31,11 @@ export const time = function(date) {
 	return hours + ":" + minutes + " " + period;
 };
 
+export const sleep = (milliseconds) => {
+	return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+
 export const timeSafe = function(date) {
 	// let time = new Date(date);
 	// let hours = time.getHours();
