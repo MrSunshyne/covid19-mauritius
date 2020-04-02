@@ -29,7 +29,7 @@
 			</div>
 			<div>
 				<p class="text-gray-200 text-center pt-5">
-					The first {{ numberOfDays }} days of the virus in these countries.
+					The first {{ numberOfDays }} days of the virus in these countries |
 					<span class=""
 						>Source :
 						<a href="https://github.com/CSSEGISandData/COVID-19"
@@ -77,7 +77,7 @@
 				},
 				options: {
 					animation: {
-						easing: 'linear',
+						easing: "linear",
 					},
 					responsive: true,
 					maintainAspectRatio: false,
@@ -95,6 +95,7 @@
 								},
 								ticks: {
 									stepSize: 10,
+									fontColor: "#fff",
 								},
 							},
 						],
@@ -103,6 +104,7 @@
 								bounds: "ticks",
 								ticks: {
 									source: "labels",
+									fontColor: "#fff",
 								},
 							},
 						],
@@ -165,10 +167,9 @@
 					// this.numberOfDays = 1;
 
 					while (this.numberOfDays != 2) {
-						await sleep(200)
+						await sleep(200);
 						this.numberOfDays--;
 					}
-
 
 					this.timer.interval = setInterval(this.incrementTime, 500);
 				}

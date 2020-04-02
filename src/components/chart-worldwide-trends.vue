@@ -1,5 +1,5 @@
 <template>
-	<div class="py-8 px-8 md:px-0 bg-teal-900">
+	<div class="py-8 px-8 md:px-0 bg-pink-700">
 		<div class="container mx-auto flex flex-col items-center">
 			<h2 class="text-2xl leading-none font-bold text-center pb-8 text-white">
 				Worldwide Trends
@@ -45,7 +45,7 @@
 			</div>
 			<div>
 				<p class="text-gray-200 text-center pt-5">
-					Mauritius on the global (linear) scale with selected countries
+					Mauritius on the global (linear) scale with selected countries |
 					<span class=""
 						>Source :
 						<a href="https://github.com/CSSEGISandData/COVID-19"
@@ -81,6 +81,7 @@
 				options: {
 					responsive: true,
 					maintainAspectRatio: false,
+
 					legend: {
 						display: true,
 						labels: {
@@ -94,6 +95,9 @@
 									color: "rgba(255,255,255,0.1)",
 								},
 								type: "linear",
+								ticks: {
+									fontColor:"#fff"
+								},
 							},
 						],
 						xAxes: [
@@ -102,6 +106,7 @@
 								bounds: "ticks",
 								ticks: {
 									source: "labels",
+									fontColor:"#fff"
 								},
 							},
 						],
