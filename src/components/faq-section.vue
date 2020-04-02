@@ -7,8 +7,13 @@
 			<li>
 				<label>What is the source ?</label>
 				<p>
-					Statistics on Mauritius is taken from <a target="_blank" href="https://besafemoris.mu/stats/">BeSafeMoris</a>, the official news source announced by the Mauritian Government.
-					Statistics on all other countries come from <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">John Hopkins CSSE.</a>
+					Statistics on Mauritius is taken from
+					<a target="_blank" href="https://besafemoris.mu/stats/">BeSafeMoris</a
+					>, the official news source announced by the Mauritian Government.
+					Statistics on all other countries come from
+					<a href="https://github.com/CSSEGISandData/COVID-19" target="_blank"
+						>John Hopkins CSSE.</a
+					>
 				</p>
 			</li>
 			<li>
@@ -22,22 +27,23 @@
 			<li>
 				<label>Is this page official?</label>
 				<p>
-					No. This is a community effort to visualize the large flux of data coming our way.
-					However all data are taken from official and trusted sources i.e BeSafeMoris and John Hopkins CSSE.
-
+					No. This is a community effort to visualize the large flux of data
+					coming our way. However all data are taken from official and trusted
+					sources i.e BeSafeMoris and John Hopkins CSSE.
 				</p>
 			</li>
 			<li>
 				<label>Is the data about Mauritius updated automatically?</label>
 				<p>
-					No. The data about Mauritius' number of cases is updated whenever
-					practically possible after the Press Conferences of the Government and it has been updated on BeSafeMoris. The
-					backend is a simple
+					Yes. The data is updated every 5 minutes with official data from
+					BeSafeMoris.mu. I do keep an independenly maintained copy of the data
+					here using
 					<a
-							target="_blank"
+						target="_blank"
 						href="https://docs.google.com/spreadsheets/d/1DhrU8lCWYS_VKKQ3QOYbLzrJgHioQGQp5qPnpSNcUU8/edit?usp=sharing"
 						>Google Sheet</a
-					>.
+					>
+					just in case the other source fails .
 				</p>
 			</li>
 			<li>
@@ -56,15 +62,20 @@
 				</p>
 			</li>
 			<li>
-				<label>Why does this exist when there is an official BeSafeMoris website ?</label>
+				<label
+					>Why does this exist when there is an official BeSafeMoris website
+					?</label
+				>
 				<p>
-					Please use the official app for faster official updates. On this page I will add additional graphic analysis based on the same official data showing trends how Mauritius is doing compared to other countries.
+					Please use the official app for faster official updates. On this page
+					I will add additional graphic analysis based on the same official data
+					showing trends how Mauritius is doing compared to other countries.
 				</p>
 			</li>
 			<li>
 				<label
 					>Are you a journalist or from the Ministry of Health and would you
-					like to have access to update this page?</label
+					like to know more about this page?</label
 				>
 				<p>
 					Get in touch with me asap: san<span class="hidden"></span>dee<span
@@ -76,8 +87,11 @@
 			</li>
 			<li>
 				<label>Can I contribute to this project?</label>
-				<p>Yes please. This project is open source anyone can submit a PR to add new charts or other suggestions
-					<a href="https://github.com/MrSunshyne/covid19-mauritius">here</a>.</p>
+				<p>
+					Yes please. This project is open source anyone can submit a PR or
+					create an Issue to add new charts or other suggestions
+					<a href="https://github.com/MrSunshyne/covid19-mauritius">here</a>.
+				</p>
 			</li>
 		</ul>
 	</div>

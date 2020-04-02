@@ -9,7 +9,7 @@
 					class="ml-3 text-sm uppercase font-bold tracking-tight py-2 px-4 rounded-full bg-white text-black shadow"
 					@click="toggleTimer"
 				>
-					Play animation
+					Replay animation
 				</button>
 				<button
 					v-else
@@ -29,7 +29,7 @@
 			</div>
 			<div>
 				<p class="text-gray-200 text-center pt-5">
-					The first {{ numberOfDays }} days of the virus in these countries.
+					The first {{ numberOfDays }} days of the virus in these countries |
 					<span class=""
 						>Source :
 						<a href="https://github.com/CSSEGISandData/COVID-19"
@@ -45,7 +45,7 @@
 <script>
 	import LineChart from "../helpers/LineChart";
 	import BarChart from "../helpers/BarChart";
-	import {pickColor, trimEmptyCountryData} from "../helpers";
+	import {pickColor, trimEmptyCountryData, sleep} from "../helpers";
 	import {mapActions, mapGetters} from "vuex";
 	import {FETCH_VERIFIED_STATS} from "../store";
 
@@ -60,7 +60,7 @@
 				startDate: new Date("03/01/2020"),
 				endDate: new Date(),
 				dayInterval: 1000 * 60 * 60 * 24,
-				numberOfDays: 10,
+				numberOfDays: 15,
 				sliderOptions: {
 					bgStyle: {
 						backgroundColor: "#fff",
@@ -76,6 +76,9 @@
 					},
 				},
 				options: {
+					animation: {
+						easing: "linear",
+					},
 					responsive: true,
 					maintainAspectRatio: false,
 					legend: {
@@ -92,6 +95,7 @@
 								},
 								ticks: {
 									stepSize: 10,
+									fontColor: "#fff",
 								},
 							},
 						],
@@ -100,6 +104,7 @@
 								bounds: "ticks",
 								ticks: {
 									source: "labels",
+									fontColor: "#fff",
 								},
 							},
 						],
@@ -120,7 +125,7 @@
 			this.FETCH_TIMESERIES();
 		},
 		methods: {
-			...mapActions(["FETCH_TIMESERIES", 'FETCH_VERIFIED_STATS']),
+			...mapActions(["FETCH_TIMESERIES", "FETCH_VERIFIED_STATS"]),
 			fillData() {
 				let dataset = [];
 
@@ -155,17 +160,18 @@
 					datasets: dataset,
 				};
 			},
-			toggleTimer() {
+			async toggleTimer() {
 				if (this.timer.isRunning) {
 					clearInterval(this.timer.interval);
 				} else {
 					// this.numberOfDays = 1;
 
-					while (this.numberOfDays != 1) {
+					while (this.numberOfDays != 2) {
+						await sleep(200);
 						this.numberOfDays--;
 					}
 
-					this.timer.interval = setInterval(this.incrementTime, 1000);
+					this.timer.interval = setInterval(this.incrementTime, 500);
 				}
 				this.timer.isRunning = !this.timer.isRunning; // better to read
 			},
@@ -189,7 +195,12 @@
 				}
 				return result;
 			},
-			...mapGetters(["getActive", "getTimeseries", "getCuratedTimeseries", "getVerifiedStats"]),
+			...mapGetters([
+				"getActive",
+				"getTimeseries",
+				"getCuratedTimeseries",
+				"getVerifiedStats",
+			]),
 		},
 		watch: {
 			compoundProperty() {

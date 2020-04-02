@@ -98,7 +98,7 @@
 							label: "Recovered",
 							borderColor: "#4bce00",
 							backgroundColor: "transparent",
-							data: this.getRecovered,
+							data: this.getTotalRecovered,
 							...this.points,
 						},
 						{
@@ -118,7 +118,7 @@
 				"getTimestamps",
 				"getTotal",
 				"getTotalDeceased",
-				"getRecovered",
+				"getTotalRecovered",
 				"getActive",
 			]),
 		},

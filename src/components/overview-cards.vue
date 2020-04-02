@@ -47,7 +47,7 @@
 
 	export default {
 		mounted() {
-			this.FETCH_VERIFIED_STATS()
+			// this.FETCH_VERIFIED_STATS()
 		},
 		methods:{
 			...mapActions(['FETCH_VERIFIED_STATS'])

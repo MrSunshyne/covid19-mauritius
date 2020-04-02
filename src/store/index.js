@@ -34,8 +34,10 @@ export default new Vuex.Store({
 			"Korea, South",
 			"United Kingdom",
 			"Italy",
-			"Thailand",
+			"US",
 			"Malaysia",
+			"South Africa",
+			"Australia",
 		],
 	},
 
@@ -46,8 +48,8 @@ export default new Vuex.Store({
 		getStats(state) {
 			return state.stats;
 		},
-		getVerifiedStats(state){
-			return state.verified_stats
+		getVerifiedStats(state) {
+			return state.verified_stats;
 		},
 		getTimestamps(state) {
 			if (state.stats.length > 0) {
@@ -58,16 +60,9 @@ export default new Vuex.Store({
 			}
 		},
 		getNew(state) {
-			if (state.stats.length > 0) {
-				let result = state.stats.map((row) => row.new);
-				return result;
-			} else {
-				return {};
-			}
-		},
-		getRecovered(state) {
-			if (state.stats.length > 0) {
-				let result = state.stats.map((row) => row.recovered);
+			let reverse = [...state.verified_stats].reverse();
+			if (reverse.length > 0) {
+				let result = reverse.map((row) => row.today_cases);
 				return result;
 			} else {
 				return {};
@@ -81,9 +76,21 @@ export default new Vuex.Store({
 				return {};
 			}
 		},
+		getTotalRecovered(state) {
+			if (state.stats.length > 0) {
+				let result = state.stats.map((row) => row.recovered);
+				return result;
+			} else {
+				return {};
+			}
+		},
 		getTotalDeceased(state) {
 			if (state.stats.length > 0) {
-				let result = state.stats.map((row) => row.cumdeceased);
+				// let result = state.stats.map((row) => row.cumdeceased);
+				// return result;
+
+				let reverse = [...state.verified_stats].reverse();
+				let result = reverse.map((row) => row.death);
 				return result;
 			} else {
 				return {};
@@ -91,7 +98,11 @@ export default new Vuex.Store({
 		},
 		getTotal(state) {
 			if (state.stats.length > 0) {
-				let result = state.stats.map((row) => row.cumnew);
+				// let result = state.stats.map((row) => row.cumnew);
+				// return result;
+
+				let reverse = [...state.verified_stats].reverse();
+				let result = reverse.map((row) => row.total_cases);
 				return result;
 			} else {
 				return {};
@@ -99,8 +110,17 @@ export default new Vuex.Store({
 		},
 		getActive(state) {
 			if (state.stats.length > 0) {
-				let result = state.stats.map((row) => row.active);
-				return result;
+				// let result = state.stats.map((row) => row.active);
+				// return result
+
+				let reverse = [...state.verified_stats].reverse();
+				let verifiedResult = reverse.map((row) => {
+					return (
+						getInt(row.total_cases) -
+						(getInt(row.death) + getInt(row.recovered))
+					);
+				});
+				return verifiedResult;
 			} else {
 				return {};
 			}
@@ -128,20 +148,21 @@ export default new Vuex.Store({
 			// Fetch Verified Stats
 
 			if (state.verified_stats.length > 1) {
-				let latestStat = state.verified_stats[0]
+				let latestStat = state.verified_stats[0];
 
-				overview.active.amt = getInt(latestStat.total_cases) - getInt(latestStat.death);
+				overview.active.amt =
+					getInt(latestStat.total_cases) - getInt(latestStat.death);
 				overview.active.diff = getInt(latestStat.today_cases);
 
-				overview.recovered.amt = getInt(latestStat.recovered)
+				overview.recovered.amt = getInt(latestStat.recovered);
 
-				overview.deceased.amt = getInt(latestStat.death)
-				overview.deceased.diff = getInt(latestStat.today_death)
+				overview.deceased.amt = getInt(latestStat.death);
+				overview.deceased.diff = getInt(latestStat.today_death);
 
 				overview.total.amt = getInt(latestStat.total_cases);
 				overview.total.diff = getInt(latestStat.today_cases);
 
-				return overview
+				return overview;
 			}
 
 			if (state.stats.length === 0) {
@@ -214,7 +235,7 @@ export default new Vuex.Store({
 		[SET_UPDATED](state, updated) {
 			state.updated = {
 				value: updated,
-				ago: updated.split(' ')[0]
+				ago: updated.split(" ")[0],
 			};
 		},
 	},
@@ -247,7 +268,6 @@ export default new Vuex.Store({
 				const result = await fetchJson(URL);
 				commit(SET_VERIFIED_STATS, result);
 				commit(SET_UPDATED, result[0].case_date);
-
 			} catch (error) {
 				throw new Error(
 					"Error should be caught by Vue global error handler." + error
