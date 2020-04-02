@@ -76,6 +76,9 @@
 					},
 				},
 				options: {
+					animation: {
+						easing: 'linear',
+					},
 					responsive: true,
 					maintainAspectRatio: false,
 					legend: {
