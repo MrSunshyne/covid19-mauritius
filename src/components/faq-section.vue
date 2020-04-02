@@ -73,6 +73,16 @@
 				</p>
 			</li>
 			<li>
+				<label>Can COVID-19 ... ?</label>
+				<p>
+					We hear a lot of measures and information that might slow down or help prevent the spread 
+					of COVID-19. Sadly, many of them are incorrect, unproven and/or fake. Please
+					refer to the official recommendations from the World Health Organization 
+					<a target="_blank" href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public/myth-busters">
+					here</a>.
+				</p>
+			</li>
+			<li>
 				<label
 					>Are you a journalist or from the Ministry of Health and would you
 					like to know more about this page?</label
