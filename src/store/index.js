@@ -36,6 +36,8 @@ export default new Vuex.Store({
 			"Italy",
 			"Thailand",
 			"Malaysia",
+			"South Africa",
+			"Australia"
 		],
 	},
 
