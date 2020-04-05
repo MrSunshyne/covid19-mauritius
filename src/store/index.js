@@ -79,7 +79,6 @@ export default new Vuex.Store({
 		getTotalRecovered(state) {
 			if (state.stats.length > 0) {
 				let result = state.stats.map((row) => row.recovered);
-				return 7;
 				return result;
 			} else {
 				return {};
@@ -148,15 +147,12 @@ export default new Vuex.Store({
 
 			// Fetch Verified Stats
 
-			if (state.verified_stats.length > 1) {
+			if (state.verified_stats.length > 1 && state.stats.length > 1) {
 				let latestStat = state.verified_stats[0];
 
-				overview.active.amt =
-					getInt(latestStat.total_cases) - getInt(latestStat.death);
-				overview.active.diff = getInt(latestStat.today_cases);
 
-				overview.recovered.amt = getInt(latestStat.recovered);
-				overview.recovered.amt = 7;
+				// overview.recovered.amt = getInt(latestStat.recovered);
+
 
 				overview.deceased.amt = getInt(latestStat.death);
 				overview.deceased.diff = getInt(latestStat.today_death);
@@ -164,9 +160,20 @@ export default new Vuex.Store({
 				overview.total.amt = getInt(latestStat.total_cases);
 				overview.total.diff = getInt(latestStat.today_cases);
 
+
+				let i = state.stats.length - 1;
+				overview.recovered.amt += getInt(state.stats[i].cumrecovered);
+				overview.recovered.diff += getInt(state.stats[i].recovered);
+
+
+				overview.active.amt =
+					getInt(latestStat.total_cases) - getInt(latestStat.death) - getInt(state.stats[i].recovered);
+				overview.active.diff = getInt(latestStat.today_cases);
+
 				return overview;
 			}
 
+			// console.log(state.stats)
 			if (state.stats.length === 0) {
 				return overview;
 			}

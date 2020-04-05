@@ -17,7 +17,8 @@
 				</div>
 				<div
 					:title="`${diff} new cases since yesterday`"
-					class="diff leading-tight text-red-400 text-xs self-end font-bold pb-2"
+					class="diff leading-tight text-xs self-end font-bold pb-2"
+					:class="`text-${color}-500`"
 					v-if="diffo.show"
 				>
 					<span>{{ diffo.sign }}</span>
