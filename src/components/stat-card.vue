@@ -11,9 +11,12 @@
 			<div class="label text-gray-700 text-n md:text-xl">{{ label }}</div>
 			<div class="value-wrapper flex items-baseline">
 				<div
-					class="value text-gray-800 self-end text-3xl md:text-5xl leading-none font-bold pr-3"
+					class="value self-end text-gray-900 text-3xl md:text-5xl leading-none font-bold pr-3"
 				>
 					{{ value }}
+				</div>
+				<div class="text-gray-800 text-red-500 text-green-500 hidden">
+
 				</div>
 				<div
 					:title="`${diff} new cases since yesterday`"
