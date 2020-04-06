@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "required": ["case_date", "total_cases", "today_cases", "death", "recovered", "critical", "today_deaths"],
+      "required": ["case_date", "total_cases", "today_cases", "death", "total_recovered","today_recovered", "critical", "today_deaths"],
       "properties": {
         "case_date": { "type": "string" },
         "total_cases": { "type": ["number", "string"] },
