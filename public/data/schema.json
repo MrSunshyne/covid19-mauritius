@@ -7,7 +7,8 @@
         "total_cases": { "type": ["number", "string"] },
         "today_cases": { "type": ["number", "string"] },
         "death": { "type": ["number", "string"] },
-        "recovered": { "type": ["number", "string", "null"] },
+        "total_recovered": { "type": ["number", "string", "null"] },
+        "today_recovered": { "type": ["number", "string", "null"] },
         "critical": { "type": ["number", "string"] },
         "today_deaths": { "type": ["number", "string", "null"] }
       }
