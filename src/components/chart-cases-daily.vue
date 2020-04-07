@@ -42,14 +42,6 @@
 						],
 						xAxes: [
 							{
-								type: 'time',
-								time: {
-									unit: 'day',
-									unitStepSize: 1,
-									displayFormats: {
-										'day': 'MMM DD'
-									},
-								},
 								stacked: true,
 							},
 						],

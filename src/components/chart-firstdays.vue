@@ -122,7 +122,6 @@
 			};
 		},
 		mounted() {
-			this.FETCH_TIMESERIES();
 		},
 		methods: {
 			...mapActions(["FETCH_TIMESERIES", "FETCH_VERIFIED_STATS"]),

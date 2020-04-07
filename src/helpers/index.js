@@ -26,6 +26,19 @@ export function reverseDate(str) {
 	return str.split("/").reverse().join("/");
 }
 
+export function days_between(date1, date2) {
+
+	// The number of milliseconds in one day
+	const ONE_DAY = 1000 * 60 * 60 * 24;
+
+	// Calculate the difference in milliseconds
+	const differenceMs = Math.abs(date1 - date2);
+
+	// Convert back to days and return
+	return Math.round(differenceMs / ONE_DAY);
+
+}
+
 export const time = function(date) {
 	let time = new Date(date);
 	let hours = time.getHours();

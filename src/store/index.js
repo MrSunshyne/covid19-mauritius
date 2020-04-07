@@ -3,6 +3,7 @@ import Vuex from "vuex";
 
 import timeago from "../helpers/timeago";
 import {extractData, fetchJson, getInt, pick, reverseDate} from "@/helpers";
+import moment from 'moment';
 
 Vue.use(Vuex);
 
@@ -54,7 +55,10 @@ export default new Vuex.Store({
 		getTimestamps(state) {
 			if (state.stats.length > 0) {
 				let reverse = [...state.verified_stats].reverse();
-				let verified = reverse.map((row) => reverseDate(row.case_date));
+				let verified = reverse.map((row) => {
+					// provide parse date format to avoid deprecation warning
+					return moment(row.case_date, 'dd/mm/yyyy').format("MMM DD")
+				});
 				return verified;
 			} else {
 				return {};

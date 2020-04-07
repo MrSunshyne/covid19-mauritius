@@ -13,7 +13,7 @@
 						placeholder="Start Date"
 						type="date"
 						v-model="startDate"
-						:disabled-dates="{from: new Date()}"
+						:disabled-dates="{from: new Date() , to: new Date('2020/01/22')}"
 					></datepicker>
 				</div>
 
@@ -27,6 +27,7 @@
 						:disabled-dates="{from: new Date()}"
 					></datepicker>
 				</div>
+
 				<!--				<button-->
 				<!--					@click="toggleChartYAxisType"-->
 				<!--					class="mx-auto btn p-2 bg-green-600 hover:bg-green-700 text-xs uppercase font-bold rounded text-white inline-block mb-8"-->
@@ -62,7 +63,8 @@
 	import LineChart from "../helpers/LineChart";
 	import BarChart from "../helpers/BarChart";
 	import Datepicker from "vuejs-datepicker";
-	import {pickColor} from "../helpers";
+	import {days_between, pickColor} from "../helpers";
+	import {format} from 'moment'
 
 	import {mapActions, mapGetters} from "vuex";
 
@@ -75,7 +77,7 @@
 		data() {
 			return {
 				datacollection: null,
-				startDate: new Date("03/01/2020"),
+				startDate: new Date("2020/01/22"),
 				endDate: new Date(),
 				dayInterval: 1000 * 60 * 60 * 24,
 				options: {
@@ -88,6 +90,7 @@
 							fontColor: "rgb(255, 255, 255)",
 						},
 					},
+
 					scales: {
 						yAxes: [
 							{
@@ -102,10 +105,16 @@
 						],
 						xAxes: [
 							{
-								type: "time",
-								bounds: "ticks",
+								type: 'time',
+								time: {
+									unit: 'day',
+									unitStepSize: 1,
+									parser: 'YYYY-MM-DD',
+									displayFormats: {
+										'day': 'MMM DD'
+									},
+								},
 								ticks: {
-									source: "labels",
 									fontColor:"#fff"
 								},
 							},
@@ -125,7 +134,7 @@
 			},
 		},
 		mounted() {
-			this.FETCH_TIMESERIES();
+			// this.FETCH_TIMESERIES();
 		},
 		computed: {
 			compoundProperty() {
@@ -137,6 +146,12 @@
 					this.chartType,
 					Date.now()
 				);
+			},
+			relativeStartDate(){
+				return days_between(this.startDate, new Date('2020/01/22'))
+			},
+			relativeEndDate() {
+				return days_between(this.endDate, new Date('2020/01/22'))
 			},
 			...mapGetters([
 				"getStats",
@@ -154,10 +169,11 @@
 			getDates(startDate, endDate, interval) {
 				const duration = endDate - startDate;
 				const steps = duration / interval;
-				return Array.from(
+				let result = Array.from(
 					{length: steps + 1},
 					(v, i) => new Date(startDate.valueOf() + interval * i)
 				);
+				return result;
 			},
 			toggleChartYAxisType() {
 				if (this.options.scales.yAxes[0].type === "linear") {
@@ -183,7 +199,7 @@
 
 					let countryData = {
 						label: country,
-						data: this.getCuratedTimeseries.points[country],
+						data: this.getCuratedTimeseries.points[country].slice(this.relativeStartDate, this.relativeEndDate),
 						...this.points,
 						...highlightedCountryConfig,
 					};

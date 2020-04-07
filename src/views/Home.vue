@@ -36,6 +36,8 @@
 		created() {
 			this.$store.dispatch("FETCH_STATS");
 			this.$store.dispatch("FETCH_VERIFIED_STATS");
+			this.$store.dispatch("FETCH_TIMESERIES");
+
 		},
 	};
 </script>
