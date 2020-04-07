@@ -1,32 +1,29 @@
 <template>
 	<div class="py-8 px-8 md:px-0 bg-gray-900">
-		<div class="px-12 pb-10 sm:px-0 container mx-auto" >
-
-		</div>
 		<div class="flex flex-col">
-			<div class="flex justify-between text-white capitalize items-center">
+			<div class="md:flex justify-between text-white capitalize items-center p-4 md:py-0">
 
-				<router-link :to="`/country/${previousCountry}`" class="p-6 bg-gray-800 hover:bg-gray-700 w-2/12">
+				<router-link :to="`/country/${previousCountry}`" class="block p-2 md:p-6 bg-gray-800 hover:bg-gray-700 w-full text-center md:text-left md:w-2/12">
                     <div class="text-xs  leading-none">Show for</div>
-                    <div class="font-bold uppercase text-lg truncate">{{ previousCountry }}</div>
+                    <div class="font-bold uppercase text-sm md:text-lg truncate">{{ previousCountry }}</div>
                 </router-link>
-				<div class="pb-8 text-center">
+				<div class="py-4 md:pb-8 text-center">
 					<h2
-						class="text-4xl leading-none font-bold"
+						class="text-2xl md:text-4xl leading-none font-bold"
 						v-if="getTimeseries"
 					>
 						{{ currentCountry }}
 					</h2>
 					<div class="text-sm uppercase">COVID-19 Stats</div>
 				</div>
-                <router-link :to="`/country/${nextCountry}`" class="p-6 bg-gray-800 hover:bg-gray-700 w-2/12 text-right trim">
+                <router-link :to="`/country/${nextCountry}`" class="block p-2 md:p-6 bg-gray-800 hover:bg-gray-700 w-full md:w-2/12 text-center md:text-right trim">
                     <div class="text-xs  leading-none">Show for</div>
-                    <div class="font-bold uppercase text-lg truncate">{{ nextCountry }}</div>
+                    <div class="font-bold uppercase text-sm md:text-lg truncate">{{ nextCountry }}</div>
                 </router-link>
             </div>
 
 			<div class="flex justify-center">
-				<div class="controls-wrapper grid gap-4 sm:flex pb-8 text-white ">
+				<div class="controls-wrapper grid gap-4 sm:flex pb-0 md:pb-8 text-white ">
 					<div class="flex">
 						<label for="" class="font-bold mr-2 text-sm uppercase">From: </label>
 						<datepicker
