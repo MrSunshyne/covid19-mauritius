@@ -8,11 +8,16 @@
 
 		<ul class="flex mr-3">
 			<li>
-				Last updated:
-				<span :title="getUpdated.value" v-if="getUpdated">
-					{{ getUpdated.ago }}</span
-				>
-				<span v-else>loading..</span>
+				<a>
+					Last updated:
+					<span :title="getUpdated.value" v-if="getUpdated">
+						{{ getUpdated.ago }}</span
+					>
+					<span v-else>loading..</span>
+				</a>
+			</li>
+			<li>
+				<router-link :to="'/country/US'">Explore</router-link>
 			</li>
 			<!--      <li><a href="#" target="_blank">Statistics →</a></li>-->
 			<!--      <li><a href="#" target="_blank">About →</a></li>-->

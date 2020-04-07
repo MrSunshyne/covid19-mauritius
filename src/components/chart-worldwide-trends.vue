@@ -140,6 +140,7 @@
 			compoundProperty() {
 				// watch all these properties
 				return (
+					this.$route.params,
 					this.getCuratedTimeseries,
 					this.startDate,
 					this.endDate,
