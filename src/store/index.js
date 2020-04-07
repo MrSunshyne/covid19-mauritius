@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import timeago from "../helpers/timeago";
-import {extractData, fetchJson, getInt, pick} from "@/helpers";
+import {extractData, fetchJson, getInt, pick, reverseDate} from "@/helpers";
 
 Vue.use(Vuex);
 
@@ -53,8 +53,9 @@ export default new Vuex.Store({
 		},
 		getTimestamps(state) {
 			if (state.stats.length > 0) {
-				let result = state.stats.map((row) => row.timestamp);
-				return result;
+				let reverse = [...state.verified_stats].reverse();
+				let verified = reverse.map((row) => reverseDate(row.case_date));
+				return verified;
 			} else {
 				return {};
 			}
@@ -78,16 +79,16 @@ export default new Vuex.Store({
 		},
 		getTotalRecovered(state) {
 			if (state.stats.length > 0) {
-				let result = state.stats.map((row) => row.recovered);
-				return result;
+				let reverse = [...state.verified_stats].reverse();
+				let verified = reverse.map((row) => row.total_recovered);
+
+				return verified;
 			} else {
 				return {};
 			}
 		},
 		getTotalDeceased(state) {
 			if (state.stats.length > 0) {
-				// let result = state.stats.map((row) => row.cumdeceased);
-				// return result;
 
 				let reverse = [...state.verified_stats].reverse();
 				let result = reverse.map((row) => row.death);
@@ -98,9 +99,6 @@ export default new Vuex.Store({
 		},
 		getTotal(state) {
 			if (state.stats.length > 0) {
-				// let result = state.stats.map((row) => row.cumnew);
-				// return result;
-
 				let reverse = [...state.verified_stats].reverse();
 				let result = reverse.map((row) => row.total_cases);
 				return result;
@@ -110,9 +108,6 @@ export default new Vuex.Store({
 		},
 		getActive(state) {
 			if (state.stats.length > 0) {
-				// let result = state.stats.map((row) => row.active);
-				// return result
-
 				let reverse = [...state.verified_stats].reverse();
 				let verifiedResult = reverse.map((row) => {
 					return (
@@ -146,55 +141,23 @@ export default new Vuex.Store({
 			};
 
 			// Fetch Verified Stats
-
 			if (state.verified_stats.length > 1 && state.stats.length > 1) {
-				let latestStat = state.verified_stats[0];
+				let verified_stats = state.verified_stats[0];
 
+				overview.deceased.amt = getInt(verified_stats.death);
+				overview.deceased.diff = getInt(verified_stats.today_death);
 
-				// overview.recovered.amt = getInt(latestStat.recovered);
+				overview.total.amt = getInt(verified_stats.total_cases);
+				overview.total.diff = getInt(verified_stats.today_cases);
 
-
-				overview.deceased.amt = getInt(latestStat.death);
-				overview.deceased.diff = getInt(latestStat.today_death);
-
-				overview.total.amt = getInt(latestStat.total_cases);
-				overview.total.diff = getInt(latestStat.today_cases);
-
-
-				let i = state.stats.length - 1;
-				overview.recovered.amt += getInt(state.stats[i].cumrecovered);
-				overview.recovered.diff += getInt(state.stats[i].recovered);
-
+				overview.recovered.amt += getInt(verified_stats.total_recovered);
+				overview.recovered.diff += getInt(verified_stats.today_recovered);
 
 				overview.active.amt =
-					getInt(latestStat.total_cases) - getInt(latestStat.death) - getInt(state.stats[i].recovered);
-				overview.active.diff = getInt(latestStat.today_cases);
+					getInt(verified_stats.total_cases) - getInt(verified_stats.death) - getInt(verified_stats.total_recovered);
+				overview.active.diff = getInt(verified_stats.today_cases);
 
-				return overview;
 			}
-
-			// console.log(state.stats)
-			if (state.stats.length === 0) {
-				return overview;
-			}
-
-			let i = state.stats.length - 1;
-
-			overview.active.amt += getInt(state.stats[i].active);
-			overview.active.diff += getInt(state.stats[i].new);
-
-			overview.recovered.amt += getInt(state.stats[i].cumrecovered);
-			overview.recovered.diff += getInt(state.stats[i].recovered);
-
-			overview.deceased.amt += getInt(state.stats[i].cumdeceased);
-			overview.deceased.diff += getInt(state.stats[i].deceased);
-
-			overview.total.amt +=
-				getInt(state.stats[i].active) +
-				getInt(state.stats[i].cumdeceased) -
-				getInt(state.stats[i].cumrecovered);
-			overview.total.diff = getInt(state.stats[i].new);
-
 			return overview;
 		},
 		getTimeseries(state) {

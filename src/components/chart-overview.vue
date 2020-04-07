@@ -56,6 +56,14 @@
 						],
 						xAxes: [
 							{
+								type: 'time',
+								time: {
+									unit: 'day',
+									unitStepSize: 1,
+									displayFormats: {
+										'day': 'MMM DD'
+									},
+								},
 								stacked: true,
 							},
 						],
@@ -63,7 +71,7 @@
 				},
 				points: {
 					pointStyle: "circle",
-					borderWidth: 1,
+					borderWidth: 2,
 					datasetStrokeWidth: 1,
 				},
 			};
@@ -89,7 +97,8 @@
 						},
 						{
 							label: "Deceased",
-							borderColor: "#fff",
+							borderColor: "black",
+							borderWidth: 4,
 							backgroundColor: "transparent",
 							data: this.getTotalDeceased,
 							...this.points,

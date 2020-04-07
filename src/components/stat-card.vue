@@ -15,9 +15,7 @@
 				>
 					{{ value }}
 				</div>
-				<div class="text-gray-800 text-red-500 text-green-500 hidden">
-
-				</div>
+				<div class="text-gray-800 text-red-500 text-green-500 hidden"></div>
 				<div
 					:title="`${diff} new cases since yesterday`"
 					class="diff leading-tight text-xs self-end font-bold pb-2"

@@ -21,6 +21,11 @@ function extractObject(entry) {
 	return formattedObjet;
 }
 
+// Converts dd/mm/yyyy to yyyy/mm/dd
+export function reverseDate(str) {
+	return str.split("/").reverse().join("/");
+}
+
 export const time = function(date) {
 	let time = new Date(date);
 	let hours = time.getHours();
