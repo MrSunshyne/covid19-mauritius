@@ -53,7 +53,7 @@ export default new Vuex.Store({
 			return state.verified_stats;
 		},
 		getTimestamps(state) {
-			if (state.stats.length > 0) {
+			if (state.verified_stats.length > 0) {
 				let reverse = [...state.verified_stats].reverse();
 				let verified = reverse.map((row) => {
 					// provide parse date format to avoid deprecation warning
@@ -82,7 +82,7 @@ export default new Vuex.Store({
 			}
 		},
 		getTotalRecovered(state) {
-			if (state.stats.length > 0) {
+			if (state.verified_stats.length > 0) {
 				let reverse = [...state.verified_stats].reverse();
 				let verified = reverse.map((row) => row.total_recovered);
 
@@ -92,7 +92,7 @@ export default new Vuex.Store({
 			}
 		},
 		getTotalDeceased(state) {
-			if (state.stats.length > 0) {
+			if (state.verified_stats.length > 0) {
 
 				let reverse = [...state.verified_stats].reverse();
 				let result = reverse.map((row) => row.death);
@@ -102,7 +102,7 @@ export default new Vuex.Store({
 			}
 		},
 		getTotal(state) {
-			if (state.stats.length > 0) {
+			if (state.verified_stats.length > 0) {
 				let reverse = [...state.verified_stats].reverse();
 				let result = reverse.map((row) => row.total_cases);
 				return result;
@@ -111,7 +111,7 @@ export default new Vuex.Store({
 			}
 		},
 		getActive(state) {
-			if (state.stats.length > 0) {
+			if (state.verified_stats.length > 0) {
 				let reverse = [...state.verified_stats].reverse();
 				let verifiedResult = reverse.map((row) => {
 					return (
