@@ -76,7 +76,6 @@
 		mounted() {},
 		methods: {
 			fillData() {
-				console.log(this.getTimestamps)
 				this.datacollection = {
 					labels: this.getTimestamps,
 					datasets: [
