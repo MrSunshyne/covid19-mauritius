@@ -57,7 +57,7 @@ export default new Vuex.Store({
 				let reverse = [...state.verified_stats].reverse();
 				let verified = reverse.map((row) => {
 					// provide parse date format to avoid deprecation warning
-					return moment(row.case_date, 'dd/mm/yyyy').format("MMM DD")
+					return moment(row.case_date, 'DD/MM/YYYY').format("MMM DD")
 				});
 				return verified;
 			} else {
