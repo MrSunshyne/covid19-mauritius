@@ -1,17 +1,17 @@
 <template>
 	<div class="shadow p-4 flex overflow-hidden rounded">
-		<div class="icon w-20 mr-2 md:mr-4 flex justify-center items-center">
+		<div class="icon w-12 mr-2 md:mr-4 flex justify-center items-center">
 			<img
 				:alt="icon"
 				:src="`/images/${icon}.svg`"
-				class="block w-12 h-12 md:w-20 md:h-20 object-contain"
+				class="block w-12 h-12 md:w-12 md:h-12 object-contain"
 			/>
 		</div>
 		<div class="description">
-			<div class="label text-gray-700 text-n md:text-xl">{{ label }}</div>
+			<div class="label text-gray-700 ">{{ label }}</div>
 			<div class="value-wrapper flex items-baseline">
 				<div
-					class="value self-end text-gray-900 text-3xl md:text-5xl leading-none font-bold pr-3"
+					class="value self-end text-gray-900 text-2xl md:text-3xl leading-none font-bold pr-3"
 				>
 					{{ value }}
 				</div>

@@ -1,27 +1,41 @@
 <template>
 	<div class="py-8 px-8 md:px-0 bg-gray-900">
 		<div class="flex flex-col">
-			<div class="md:flex justify-between text-white capitalize items-center p-4 md:py-0">
-				<router-link :to="`/country/${previousCountry}`" class="block p-2 md:p-6 bg-gray-800 hover:bg-gray-700 w-full text-center md:text-left sm:w-3/12 lg:w-2/12">
+			<div
+				class="md:flex justify-between text-white capitalize items-center p-4 md:py-0"
+			>
+				<router-link
+					:to="`/country/${previousCountry}`"
+					class="block p-2 md:p-6 bg-gray-800 hover:bg-gray-700 w-full text-center md:text-left sm:w-3/12 lg:w-2/12"
+				>
 					<div class="text-xs  leading-none">Show for</div>
-					<div class="font-bold uppercase text-sm md:text-lg truncate">{{ previousCountry }}</div>
+					<div class="font-bold uppercase text-sm md:text-lg truncate">
+						{{ previousCountry }}
+					</div>
 				</router-link>
 
-				<router-link :to="`/country/${nextCountry}`" class="block p-2 md:p-6 bg-gray-800 hover:bg-gray-700 w-full sm:w-3/12 lg:w-2/12 text-center md:text-right trim">
+				<router-link
+					:to="`/country/${nextCountry}`"
+					class="block p-2 md:p-6 bg-gray-800 hover:bg-gray-700 w-full sm:w-3/12 lg:w-2/12 text-center md:text-right trim"
+				>
 					<div class="text-xs  leading-none">Show for</div>
-					<div class="font-bold uppercase text-sm md:text-lg truncate">{{ nextCountry }}</div>
+					<div class="font-bold uppercase text-sm md:text-lg truncate">
+						{{ nextCountry }}
+					</div>
 				</router-link>
 			</div>
 
-			<div class="md:flex justify-center text-white capitalize items-center p-4 md:py-0">
+			<div
+				class="md:flex justify-center text-white items-center p-4 md:py-0"
+			>
 				<div class="">
 					<label for="" class="font-bold mr-2 text-sm uppercase">From: </label>
 					<datepicker
-							class="text-center text-black cursor-pointer"
-							placeholder="Start Date"
-							type="date"
-							v-model="startDate"
-							:disabled-dates="{from: new Date(), to: new Date('2020/01/22')}"
+						class="text-center text-black cursor-pointer"
+						placeholder="Start Date"
+						type="date"
+						v-model="startDate"
+						:disabled-dates="{from: new Date(), to: new Date('2020/01/22')}"
 					></datepicker>
 				</div>
 
@@ -30,92 +44,77 @@
 						class="text-2xl md:text-4xl leading-none font-bold"
 						v-if="getTimeseries"
 					>
-						{{ currentCountry }}
+						<span class="text-gray-600">COVID-19 in </span>{{ currentCountry }}
 					</h2>
-					<div class="text-sm uppercase">COVID-19 Stats</div>
 				</div>
 
 				<div class="">
-					<label for="" class="block w-full font-bold mr-2 text-sm sm:text-right uppercase">To: </label>
+					<label
+						for=""
+						class="block w-full font-bold mr-2 text-sm sm:text-right uppercase"
+						>To:
+					</label>
 					<datepicker
-							class="text-center text-black cursor-pointer"
-							placeholder="End Date"
-							type="date"
-							v-model="endDate"
-							:disabled-dates="{from: new Date()}"
+						class="text-center text-black cursor-pointer"
+						placeholder="End Date"
+						type="date"
+						v-model="endDate"
+						:disabled-dates="{from: new Date()}"
 					></datepicker>
 				</div>
-            </div>
-
-<!--			<div class="flex justify-center">-->
-<!--				<div class="controls-wrapper grid gap-4 sm:flex pb-0 md:pb-8 text-white ">-->
-<!--					<div class="flex">-->
-<!--						<label for="" class="font-bold mr-2 text-sm uppercase">From: </label>-->
-<!--						<datepicker-->
-<!--							class="mr-2 text-center text-black"-->
-<!--							placeholder="Start Date"-->
-<!--							type="date"-->
-<!--							v-model="startDate"-->
-<!--							:disabled-dates="{from: new Date(), to: new Date('2020/01/22')}"-->
-<!--						></datepicker>-->
-<!--					</div>-->
-
-<!--					<div class="flex">-->
-<!--						<label for="" class="font-bold mr-2 text-sm uppercase">To: </label>-->
-<!--						<datepicker-->
-<!--							class="mr-2 text-center text-black"-->
-<!--							placeholder="End Date"-->
-<!--							type="date"-->
-<!--							v-model="endDate"-->
-<!--							:disabled-dates="{from: new Date()}"-->
-<!--						></datepicker>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--				&lt;!&ndash;				<button&ndash;&gt;-->
-<!--				&lt;!&ndash;					@click="toggleChartYAxisType"&ndash;&gt;-->
-<!--				&lt;!&ndash;					class="mx-auto btn p-2 bg-green-600 hover:bg-green-700 text-xs uppercase font-bold rounded text-white inline-block mb-8"&ndash;&gt;-->
-<!--				&lt;!&ndash;				>&ndash;&gt;-->
-<!--				&lt;!&ndash;					Chart type&ndash;&gt;-->
-<!--				&lt;!&ndash;				</button>&ndash;&gt;-->
-<!--				&lt;!&ndash;				<div v-else>Data loaded succesfully</div>&ndash;&gt;-->
-<!--			</div>-->
-
+			</div>
 
 			<div>
 				<div class="container mx-auto">
-					<div class="grid grid-cols-1 sm:grid-cols-2 justify-center lg:grid-cols-3 gap-5 py-8" v-if="countryData">
+					<div
+						class="grid grid-cols-1 sm:grid-cols-2 justify-center lg:grid-cols-5 gap-5 py-8"
+						v-if="countryData"
+					>
+						<StatCard
+							:color="'red'"
+							:icon="'total'"
+							:label="'Total'"
+							:value="confirmed"
+							class="bg-white"
+							>icon
+						</StatCard>
 						<StatCard
 								:color="'red'"
-								:icon="'total'"
-								:label="'Total'"
-								:value="confirmed"
+								:icon="'corona-icon'"
+								:label="'Active'"
+								:value="active"
 								class="bg-white"
 						>icon
 						</StatCard>
 						<StatCard
-								:color="'gray'"
-								:icon="'deceased'"
-								:label="'Deceased'"
-								:value="deaths"
-								class="bg-white"
-						>icon
+							:color="'gray'"
+							:icon="'deceased'"
+							:label="'Deceased'"
+							:value="deaths"
+							class="bg-white"
+							>icon
 						</StatCard>
 						<StatCard
-								:color="'green'"
-								:icon="'recovered'"
-								:label="'Recovered'"
-								:value="recovered"
-								class="bg-white"
-						>icon
+							:color="'green'"
+							:icon="'recovered'"
+							:label="'Recovered'"
+							:value="recovered"
+							class="bg-white"
+							>icon
+						</StatCard>
+						<StatCard
+							:color="'green'"
+							:icon="'corona-icon'"
+							:label="'Affected Population'"
+							:value="affectedPopulation"
+							class="bg-white"
+							>icon
 						</StatCard>
 					</div>
 				</div>
 			</div>
 
-
 			<div class="chart container mx-auto ">
-
-
 				<line-chart
 					:chart-data="datacollection"
 					:options="options"
@@ -142,7 +141,7 @@
 	import Datepicker from "vuejs-datepicker";
 	import {days_between, getInt, pickColor} from "../helpers";
 	import {format} from "moment";
-	import StatCard from "../components/stat-card";
+	import StatCard from "../components/stat-card-small";
 
 	import {mapActions, mapGetters} from "vuex";
 
@@ -151,7 +150,7 @@
 			LineChart,
 			BarChart,
 			Datepicker,
-			StatCard
+			StatCard,
 		},
 		data() {
 			return {
@@ -169,7 +168,6 @@
 							fontColor: "rgb(255, 255, 255)",
 						},
 					},
-
 					scales: {
 						yAxes: [
 							{
@@ -227,16 +225,25 @@
 			},
 			nextCountry() {
 				let index = getInt(this.currentCountryIndex) + 1;
-				let result = this.allCountries[index];
-				return result;
+				if (index === this.allCountries.length){
+					return this.allCountries[0]
+				} else {
+					return this.allCountries[index];
+				}
 			},
 			previousCountry() {
 				let index = getInt(this.currentCountryIndex) - 1;
-				let result = this.allCountries[index];
-				return result;
+				if (index === -1){
+					return this.allCountries[this.allCountries.length - 1]
+				} else {
+					return this.allCountries[index];
+				}
 			},
 			countryData() {
 				return this.getTimeseries[this.currentCountry];
+			},
+			countryPopulation() {
+				return parseInt(this.getCountryByPopulations[this.currentCountry])
 			},
 			compoundProperty() {
 				// watch all these properties
@@ -261,10 +268,20 @@
 			recovered() {
 				return this.countryData[this.countryData.length - 1].recovered;
 			},
-			confirmed(){
+			confirmed() {
 				return this.countryData[this.countryData.length - 1].confirmed;
 			},
-
+			active() {
+				return this.confirmed - this.deaths - this.recovered;
+			},
+			affectedPopulation() {
+				let result = ((this.active / this.countryPopulation) * 100).toFixed(3)
+				if (isNaN(result)){
+					return 'N/A'
+				} else {
+					return result +'%'
+				}
+			},
 			...mapGetters([
 				"getStats",
 				"getTimestamps",
@@ -274,6 +291,7 @@
 				"getActive",
 				"getTimeseries",
 				"getCuratedTimeseries",
+				"getCountryByPopulations",
 			]),
 		},
 		methods: {

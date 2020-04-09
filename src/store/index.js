@@ -3,7 +3,8 @@ import Vuex from "vuex";
 
 import timeago from "../helpers/timeago";
 import {extractData, fetchJson, getInt, pick, reverseDate} from "@/helpers";
-import moment from 'moment';
+import moment from "moment";
+import {countryByPopulations} from "../data/country-by-population.js";
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
 		stats: [],
 		verified_stats: [],
 		updated: null,
+		countryByPopulations,
 		timeseries: {
 			China: [
 				{
@@ -57,7 +59,7 @@ export default new Vuex.Store({
 				let reverse = [...state.verified_stats].reverse();
 				let verified = reverse.map((row) => {
 					// provide parse date format to avoid deprecation warning
-					return moment(row.case_date, 'DD/MM/YYYY').format("MMM DD")
+					return moment(row.case_date, "DD/MM/YYYY").format("MMM DD");
 				});
 				return verified;
 			} else {
@@ -102,7 +104,6 @@ export default new Vuex.Store({
 		},
 		getTotalDeceased(state) {
 			if (state.verified_stats.length > 0) {
-
 				let reverse = [...state.verified_stats].reverse();
 				let result = reverse.map((row) => row.death);
 				return result;
@@ -124,8 +125,7 @@ export default new Vuex.Store({
 				let reverse = [...state.verified_stats].reverse();
 				let verifiedResult = reverse.map((row) => {
 					return (
-						getInt(row.total_cases) -
-						(getInt(row.death) + getInt(row.recovered))
+						getInt(row.total_cases) - (getInt(row.death) + getInt(row.recovered))
 					);
 				});
 				return verifiedResult;
@@ -167,9 +167,10 @@ export default new Vuex.Store({
 				overview.recovered.diff += getInt(verified_stats.today_recovered);
 
 				overview.active.amt =
-					getInt(verified_stats.total_cases) - getInt(verified_stats.death) - getInt(verified_stats.total_recovered);
+					getInt(verified_stats.total_cases) -
+					getInt(verified_stats.death) -
+					getInt(verified_stats.total_recovered);
 				overview.active.diff = getInt(verified_stats.today_cases);
-
 			}
 			return overview;
 		},
@@ -186,9 +187,7 @@ export default new Vuex.Store({
 			let flatObj = {};
 			let simpleSeries = {};
 
-			let datesForHorizAxis = state.timeseries["China"].map(
-				(time) => time.date
-			);
+			let datesForHorizAxis = state.timeseries["China"].map((time) => time.date);
 
 			for (let country in selectedCountriesObject) {
 				flatObj[country] = selectedCountriesObject[country].map((time) => {
@@ -205,6 +204,9 @@ export default new Vuex.Store({
 				simple: simpleSeries,
 			};
 		},
+		getCountryByPopulations(state) {
+			return state.countryByPopulations;
+		}
 	},
 
 	mutations: {
