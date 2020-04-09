@@ -73,6 +73,15 @@ export default new Vuex.Store({
 				return {};
 			}
 		},
+		getRecovered(state) {
+			let reverse = [...state.verified_stats].reverse();
+			if (reverse.length > 0) {
+				let result = reverse.map((row) => row.today_recovered);
+				return result;
+			} else {
+				return {};
+			}
+		},
 		getDeceased(state) {
 			if (state.stats.length > 0) {
 				let result = state.stats.map((row) => row.deceased);

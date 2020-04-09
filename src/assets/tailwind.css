@@ -2,4 +2,18 @@
 
 @tailwind components;
 
+
+@screen sm {
+    .container {
+        @apply px-10;
+    }
+}
+
+@screen lg {
+    .container {
+        @apply px-0;
+    }
+}
+
+
 @tailwind utilities;
