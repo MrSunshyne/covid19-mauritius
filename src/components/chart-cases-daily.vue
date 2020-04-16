@@ -69,12 +69,12 @@
 							label: "New Cases",
 							backgroundColor: "#E44450",
 							data: this.getNew,
-						}
-						// {
-						// 	label: "Recovered",
-						// 	backgroundColor: "#19aa00",
-						// 	data: this.getRecovered,
-						// },
+						},
+						{
+							label: "Recovered",
+							backgroundColor: "#19aa00",
+							data: this.getRecovered,
+						},
 					],
 				};
 			},

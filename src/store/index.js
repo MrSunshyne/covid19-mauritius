@@ -76,13 +76,22 @@ export default new Vuex.Store({
 			}
 		},
 		getRecovered(state) {
-			let reverse = [...state.verified_stats].reverse();
-			if (reverse.length > 0) {
-				let result = reverse.map((row) => row.today_recovered);
+			let stats = state.stats;
+			if (stats.length > 0) {
+				let result = stats.map((row) => row.recovered);
+				// console.log(result)
 				return result;
 			} else {
 				return {};
 			}
+
+				// let reverse = [...state.verified_stats].reverse();
+				// if (reverse.length > 0) {
+				// 	let result = reverse.map((row) => row.today_recovered);
+				// 	return result;
+				// } else {
+				// 	return {};
+				// }
 		},
 		getDeceased(state) {
 			if (state.stats.length > 0) {
@@ -121,12 +130,16 @@ export default new Vuex.Store({
 			}
 		},
 		getActive(state) {
-			if (state.verified_stats.length > 0) {
+			if (state.verified_stats.length > 0 && state.stats.length > 0) {
 				let reverse = [...state.verified_stats].reverse();
-				let verifiedResult = reverse.map((row) => {
-					return (
-						getInt(row.total_cases) - (getInt(row.death) + getInt(row.recovered))
-					);
+				let stats = state.stats;
+				let verifiedResult = reverse.map((row, index) => {
+					let today_recovered = stats[index].cumrecovered;
+					let today_death = stats[index].cumdeceased;
+
+						//getInt(row.total_cases) - ((getInt(row.death) + getInt(row.today_recovered))) commented until BeSafeMoris adds daily recovered
+					let active = 	getInt(row.total_cases) - ((getInt(today_death) + getInt(today_recovered)));
+					return active
 				});
 				return verifiedResult;
 			} else {
@@ -246,6 +259,7 @@ export default new Vuex.Store({
 
 			const stats = extractData(entry);
 			commit(SET_STATS, stats);
+			// console.log(stats)
 			// commit(SET_UPDATED, updated);
 			return stats;
 		},
