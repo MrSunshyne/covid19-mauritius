@@ -21,7 +21,7 @@
 				<p>
 					Active cases are the last reported number of people who have the
 					infection. It does not include deceased people or people who have
-					recovered.
+					recovered. Active cases also excludes people who went abroad for treatment.
 				</p>
 			</li>
 			<li>

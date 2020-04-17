@@ -139,7 +139,7 @@ export default new Vuex.Store({
 						let today_death = stats[index].cumdeceased;
 
 							//getInt(row.total_cases) - ((getInt(row.death) + getInt(row.today_recovered))) commented until BeSafeMoris adds daily recovered
-						let active = 	getInt(row.total_cases) - ((getInt(today_death) + getInt(today_recovered)));
+						let active = 	getInt(row.total_cases) - ((getInt(today_death) + getInt(today_recovered) + getInt(row.other)));
 						return active
 					}
 					return null
@@ -167,6 +167,9 @@ export default new Vuex.Store({
 					diff: 0,
 					amt: 0,
 				},
+				other: {
+					amt: 0
+				}
 			};
 
 			// Fetch Verified Stats
@@ -186,7 +189,10 @@ export default new Vuex.Store({
 					getInt(verified_stats.total_cases) -
 					getInt(verified_stats.death) -
 					getInt(verified_stats.total_recovered);
+				overview.active.amt = verified_stats.active_cases;
 				overview.active.diff = getInt(verified_stats.today_cases);
+
+				overview.other.amt = verified_stats.other
 			}
 			return overview;
 		},

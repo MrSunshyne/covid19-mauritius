@@ -36,7 +36,11 @@
 				:value="overview.total.amt"
 				>icon
 			</StatCard>
-
+		</div>
+		<div class="pt-4 text-gray-700">
+			<p >
+				* <span class="font-bold">{{ overview.other.amt }} patients</span> abroad for treatment are deducted from Active Cases.
+			</p>
 		</div>
 	</div>
 </template>
