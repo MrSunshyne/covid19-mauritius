@@ -134,12 +134,15 @@ export default new Vuex.Store({
 				let reverse = [...state.verified_stats].reverse();
 				let stats = state.stats;
 				let verifiedResult = reverse.map((row, index) => {
-					let today_recovered = stats[index].cumrecovered;
-					let today_death = stats[index].cumdeceased;
+					if (typeof stats[index] !== 'undefined' ) {
+						let today_recovered = stats[index].cumrecovered;
+						let today_death = stats[index].cumdeceased;
 
-						//getInt(row.total_cases) - ((getInt(row.death) + getInt(row.today_recovered))) commented until BeSafeMoris adds daily recovered
-					let active = 	getInt(row.total_cases) - ((getInt(today_death) + getInt(today_recovered)));
-					return active
+							//getInt(row.total_cases) - ((getInt(row.death) + getInt(row.today_recovered))) commented until BeSafeMoris adds daily recovered
+						let active = 	getInt(row.total_cases) - ((getInt(today_death) + getInt(today_recovered) + getInt(row.other)));
+						return active
+					}
+					return null
 				});
 				return verifiedResult;
 			} else {
@@ -164,6 +167,9 @@ export default new Vuex.Store({
 					diff: 0,
 					amt: 0,
 				},
+				other: {
+					amt: 0
+				}
 			};
 
 			// Fetch Verified Stats
@@ -183,7 +189,10 @@ export default new Vuex.Store({
 					getInt(verified_stats.total_cases) -
 					getInt(verified_stats.death) -
 					getInt(verified_stats.total_recovered);
+				overview.active.amt = verified_stats.active_cases;
 				overview.active.diff = getInt(verified_stats.today_cases);
+
+				overview.other.amt = verified_stats.other
 			}
 			return overview;
 		},
@@ -243,14 +252,19 @@ export default new Vuex.Store({
 	actions: {
 		async [FETCH_STATS]({commit}) {
 			const URL = require("@/constants/urls.json")["covid-stats"];
+			const VERIFIED = require("@/constants/urls.json")["verified-stats"];
 
 			let entry;
 			let updated;
+			let result;
 			try {
 				const {feed} = await fetchJson(URL);
-
 				entry = feed.entry;
 				updated = feed.updated;
+
+
+				result = await fetchJson(VERIFIED);
+
 			} catch (error) {
 				throw new Error(
 					"Error should be caught by Vue global error handler." + error
@@ -259,21 +273,23 @@ export default new Vuex.Store({
 
 			const stats = extractData(entry);
 			commit(SET_STATS, stats);
+			commit(SET_VERIFIED_STATS, result);
+			commit(SET_UPDATED, result[0].case_date);
 			// console.log(stats)
 			// commit(SET_UPDATED, updated);
-			return stats;
+			// return stats;
 		},
 		async [FETCH_VERIFIED_STATS]({commit}) {
-			let URL = "/data/cases.json";
-			try {
-				const result = await fetchJson(URL);
-				commit(SET_VERIFIED_STATS, result);
-				commit(SET_UPDATED, result[0].case_date);
-			} catch (error) {
-				throw new Error(
-					"Error should be caught by Vue global error handler." + error
-				);
-			}
+			// let URL = "/data/cases.json";
+			// try {
+			// 	const result = await fetchJson(URL);
+			// 	commit(SET_VERIFIED_STATS, result);
+			// 	commit(SET_UPDATED, result[0].case_date);
+			// } catch (error) {
+			// 	throw new Error(
+			// 		"Error should be caught by Vue global error handler." + error
+			// 	);
+			// }
 		},
 		async [FETCH_TIMESERIES]({commit}) {
 			let URL = "https://pomber.github.io/covid19/timeseries.json";

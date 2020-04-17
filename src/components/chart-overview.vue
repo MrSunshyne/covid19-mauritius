@@ -9,6 +9,7 @@
 					:chart-data="datacollection"
 					:options="options"
 					:responsive="true"
+					v-if="getUpdated"
 				></line-chart>
 			</div>
 			<div>
@@ -69,7 +70,7 @@
 			};
 		},
 		watch: {
-			getStats() {
+			getUpdated() {
 				this.fillData();
 			},
 		},
@@ -121,6 +122,7 @@
 				"getTotalDeceased",
 				"getTotalRecovered",
 				"getActive",
+				"getUpdated"
 			]),
 		},
 	};
