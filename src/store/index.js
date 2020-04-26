@@ -190,7 +190,10 @@ export default new Vuex.Store({
 					getInt(verified_stats.death) -
 					getInt(verified_stats.total_recovered);
 				overview.active.amt = verified_stats.active_cases;
-				overview.active.diff = getInt(verified_stats.today_cases);
+
+				let recovered = getInt(state.stats[state.stats.length - 1].recovered)
+				let newcases = getInt(verified_stats.today_cases)
+				overview.active.diff = (newcases - recovered);
 
 				overview.other.amt = verified_stats.other
 			}

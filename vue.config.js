@@ -21,8 +21,6 @@ const paths = [
  ...countryRoutes
 ];
 
-console.log(paths)
-
 module.exports = {
     configureWebpack: {
         plugins: [
