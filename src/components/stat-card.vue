@@ -19,9 +19,10 @@
 				<div
 					:title="`${diff} new cases since yesterday`"
 					class="diff leading-tight text-xs self-end font-bold pb-2"
-					:class="diffo.sign === '-'? 'text-green-500' : 'text-red-500'"
+					:class="color ? `text-${color}-500` : diffo.sign === '-'? 'text-green-500' : 'text-red-500'"
 					v-if="diffo.show"
 				>
+				<!-- If color props is present, use that, else check the positive or negative SIGN to decide green or red -->
 					<span>{{ diffo.sign }}</span>
 					<span>{{ diffo.abs }} since yesterday</span>
 				</div>
@@ -53,7 +54,7 @@
 			},
 			color: {
 				type: String,
-				default: 0,
+				default: null,
 			},
 		},
 		computed: {
