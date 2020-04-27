@@ -1,5 +1,5 @@
 <template>
-	<div class="px-12 pb-10 container mx-auto">
+	<div class="px-8 md:px-0 pb-10 container mx-auto">
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" v-if="stats && vstats">
 			<StatCard
 				:diff="overview.active.diff"

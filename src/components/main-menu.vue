@@ -6,7 +6,7 @@
 			>COVID-19 Stats
 		</router-link>
 
-		<ul class="flex mr-3">
+		<ul class="flex">
 			<li>
 				<a>
 					Last updated:
@@ -15,16 +15,16 @@
 					>
 					<span v-else>loading..</span>
 				</a>
-			</li>
+			</li> 
 			<li>
-				<router-link :to="'/country/US'">Explore</router-link>
+				<router-link :to="'/country/US'" class="bg-yellow-500 rounded text-sm hover:bg-yellow-600">Explore</router-link>
 			</li>
 			<!--      <li><a href="#" target="_blank">Statistics →</a></li>-->
 			<!--      <li><a href="#" target="_blank">About →</a></li>-->
 			<!--      <li><a href="#" target="_blank">Sources →</a></li>-->
 		</ul>
 	</div>
-</template>
+</template> 
 
 <script>
 	import {mapGetters} from "vuex";
@@ -69,6 +69,8 @@
 			ul {
 				li {
 					padding: 10px;
+					padding-right:0;
+
 
 					button {
 						margin: 10px;
@@ -76,6 +78,7 @@
 
 					a {
 						padding: 10px;
+						
 					}
 				}
 			}
