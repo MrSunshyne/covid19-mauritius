@@ -25,9 +25,7 @@
 				</router-link>
 			</div>
 
-			<div
-				class="md:flex justify-center text-white items-center p-4 md:py-0"
-			>
+			<div class="md:flex justify-center text-white items-center p-4 md:py-0">
 				<div class="">
 					<label for="" class="font-bold mr-2 text-sm uppercase">From: </label>
 					<datepicker
@@ -79,12 +77,12 @@
 							>icon
 						</StatCard>
 						<StatCard
-								:color="'red'"
-								:icon="'corona-icon'"
-								:label="'Active'"
-								:value="active"
-								class="bg-white"
-						>icon
+							:color="'red'"
+							:icon="'corona-icon'"
+							:label="'Active'"
+							:value="active"
+							class="bg-white"
+							>icon
 						</StatCard>
 						<StatCard
 							:color="'gray'"
@@ -225,16 +223,16 @@
 			},
 			nextCountry() {
 				let index = getInt(this.currentCountryIndex) + 1;
-				if (index === this.allCountries.length){
-					return this.allCountries[0]
+				if (index === this.allCountries.length) {
+					return this.allCountries[0];
 				} else {
 					return this.allCountries[index];
 				}
 			},
 			previousCountry() {
 				let index = getInt(this.currentCountryIndex) - 1;
-				if (index === -1){
-					return this.allCountries[this.allCountries.length - 1]
+				if (index === -1) {
+					return this.allCountries[this.allCountries.length - 1];
 				} else {
 					return this.allCountries[index];
 				}
@@ -243,7 +241,7 @@
 				return this.getTimeseries[this.currentCountry];
 			},
 			countryPopulation() {
-				return parseInt(this.getCountryByPopulations[this.currentCountry])
+				return parseInt(this.getCountryByPopulations[this.currentCountry]);
 			},
 			compoundProperty() {
 				// watch all these properties
@@ -275,11 +273,11 @@
 				return this.confirmed - this.deaths - this.recovered;
 			},
 			affectedPopulation() {
-				let result = ((this.active / this.countryPopulation) * 100).toFixed(3)
-				if (isNaN(result)){
-					return 'N/A'
+				let result = ((this.active / this.countryPopulation) * 100).toFixed(3);
+				if (isNaN(result)) {
+					return "N/A";
 				} else {
-					return result +'%'
+					return result + "%";
 				}
 			},
 			...mapGetters([
@@ -322,19 +320,19 @@
 					if (fields[field] === "confirmed") {
 						highlightedCountryConfig = {
 							borderWidth: 4,
-							borderColor: "#E44450",
+							borderColor: "#fff",
 						};
 					}
 
 					if (fields[field] === "recovered") {
 						highlightedCountryConfig = {
-							borderColor: "#198907",
+							borderColor: "#0f0",
 						};
 					}
 
 					if (fields[field] === "deaths") {
 						highlightedCountryConfig = {
-							borderColor: "#000",
+							borderColor: "#0ff",
 						};
 					}
 
