@@ -1,24 +1,33 @@
 <template>
-	<div class="py-8 px-8 md:px-0 bg-green-900">
+	<div class="py-8 px-8 md:px-0 bg-blue-800">
 		<div class="container mx-auto flex flex-col items-center justify-center">
 			<h2 class="text-2xl leading-normal font-bold text-center pb-8 text-white">
-				Days since Covid Free
+				Countries with Zero Cases of COVID-19
+				<!-- <input
+					type="number"
+					min="0"
+					max="100"
+					v-model="limit"
+					class="text-black w-24"
+				/> -->
 			</h2>
 
-			<pre>
-				{{ tempData }} 
+			<pre class="hidden">
+				{{ freeByCountries }}
 			</pre>
 
 			<div class="chart w-full">
-				<bar-chart
+				<horizontal-bar
 					:chart-data="datacollection"
 					:options="options"
 					:responsive="true"
-				></bar-chart>
+					:height="height"
+				></horizontal-bar>
 			</div>
 			<div>
-				<p class="text-gray-200 text-center pt-5">
-					Number of days since these country have been COVID19 free.
+				<p class="text-gray-200 text-center pt-5 pb-16">
+					Number of days since active cases country have {{ limit }} cases of
+					COVID-19.
 					<span class=""
 						>Source :
 						<a href="https://github.com/CSSEGISandData/COVID-19"
@@ -28,38 +37,51 @@
 				</p>
 			</div>
 		</div>
+		<ShareSection></ShareSection>
 	</div>
 </template>
 
 <script>
-	import LineChart from "../helpers/LineChart";
-	import BarChart from "../helpers/BarChart";
+	import HorizontalBar from "../helpers/HorizontalBar";
+	import ShareSection from "../components/share-section";
+
 	import {mapGetters} from "vuex";
 
 	export default {
 		components: {
-			LineChart,
-			BarChart,
+			HorizontalBar,
+			ShareSection,
 		},
 		data() {
 			return {
-				tempData: null,
+				labels: [],
+				limit: 0,
+				height: 500,
 				datacollection: null,
 				options: {
 					responsive: true,
 					maintainAspectRatio: false,
-					height: 500,
+					legend: {
+						display: true,
+						labels: {
+							fontColor: "rgb(255, 255, 255)",
+						},
+					},
 					scales: {
 						yAxes: [
 							{
 								ticks: {
 									stepSize: 1,
+									fontColor: "#fff",
 								},
 							},
 						],
 						xAxes: [
 							{
-								stacked: false,
+								ticks: {
+									source: "labels",
+									fontColor: "#fff",
+								},
 							},
 						],
 					},
@@ -70,46 +92,35 @@
 			getStats() {
 				this.fillData();
 			},
-			getTimeseries() {
-				this.tempFun("Mauritius");
-				console.log("hello");
+			limit() {
+				this.fillData();
 			},
 		},
 		mounted() {},
 		methods: {
 			fillData() {
 				this.datacollection = {
-					labels: this.getTimestamps,
+					labels: this.labels,
 					datasets: [
 						{
-							label: "Deceased",
-							backgroundColor: "#111",
-							data: this.getDeceased,
-						},
-						{
-							label: "New Cases",
-							backgroundColor: "#E44450",
-							data: this.getNew,
-						},
-						{
-							label: "Recovered",
-							backgroundColor: "#19aa00",
-							data: this.getRecovered,
+							label: `Number of days`,
+							backgroundColor: "#68D391",
+							data: this.freeByCountries,
 						},
 					],
 				};
 			},
-			tempFun(country) {
-				let x = this.getTimeseries[country];
-				let initialValue = [];
-				let arrayOfActiveCases = x.reduce(this.reducerActiv, initialValue);
-				arrayOfActiveCases.reverse();
+			daysCovidFreeByCountry(country) {
+				if (!this.getTimeseries.hasOwnProperty(country)) return;
 
-				let flag = 0;
+				let currentCountry = this.getTimeseries[country];
+
+				let arrayOfActiveCases = currentCountry.reduce(this.reducerActiv, []);
+				arrayOfActiveCases.reverse();
 
 				let count = 0;
 				for (let i = 0; i < arrayOfActiveCases.length; i++) {
-					if (arrayOfActiveCases[i] <= flag) {
+					if (arrayOfActiveCases[i] <= this.limit) {
 						count++;
 					} else {
 						break;
@@ -117,7 +128,7 @@
 					}
 				}
 
-				this.tempData = {count, arrayOfActiveCases};
+				return count;
 			},
 			reducerActiv(accumulator, item) {
 				let active = item.confirmed - (item.deaths + item.recovered);
@@ -134,6 +145,26 @@
 				"getDeceased",
 				"getRecovered",
 			]),
+			freeByCountries() {
+				this.labels = [];
+				let countryArray = [];
+				for (const country in this.getTimeseries) {
+					let days = this.daysCovidFreeByCountry(country);
+					if (days !== 0) {
+						countryArray.push({
+							y: country,
+							x: days,
+							backgroundColor: "#f00",
+						});
+						this.labels.push(country);
+					}
+				}
+
+				this.height = countryArray.length * 50;
+
+				// console.log(countryArray);
+				return countryArray;
+			},
 		},
 		created() {
 			this.$store.dispatch("FETCH_STATS");

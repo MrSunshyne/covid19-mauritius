@@ -1,7 +1,7 @@
 <template>
-	<div class="bg-gray-200">
+	<div class="bg-gray-200 ">
 		<main-menu></main-menu>
-		<router-view  />
+		<router-view />
 		<footer-section />
 	</div>
 </template>
