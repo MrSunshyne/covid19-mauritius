@@ -18,16 +18,16 @@
 			</li>
 			<li>
 				<router-link
-					:to="'/free'"
-					class="bg-green-400 rounded text-sm hover:bg-green-500"
-					>Covid-Free Countries</router-link
+					:to="'/country/US'"
+					class="bg-yellow-500 rounded text-sm hover:bg-yellow-600"
+					>Explore</router-link
 				>
 			</li>
 			<li>
 				<router-link
-					:to="'/country/US'"
-					class="bg-yellow-500 rounded text-sm hover:bg-yellow-600"
-					>Explore</router-link
+					:to="'/free'"
+					class="bg-green-400 rounded text-sm hover:bg-green-500"
+					>Covid-Free Countries</router-link
 				>
 			</li>
 			<!--      <li><a href="#" target="_blank">Statistics →</a></li>-->
@@ -55,9 +55,12 @@
 			list-style: none;
 			display: flex;
 			justify-content: center;
+			flex-wrap: wrap;
 
 			li {
 				position: relative;
+				margin-bottom: 10px;
+				margin-left: 10px;
 
 				button {
 					margin: 10px;
@@ -65,7 +68,7 @@
 
 				a {
 					padding: 10px;
-					display: block;
+					display: inline-block;
 					@apply border-2;
 					text-decoration: none;
 					border-color: transparent;
