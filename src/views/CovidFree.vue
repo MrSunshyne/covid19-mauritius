@@ -21,7 +21,6 @@
 					:chart-data="datacollection"
 					:options="options"
 					:responsive="true"
-					:height="height"
 				></horizontal-bar>
 			</div>
 			<div>
@@ -92,11 +91,16 @@
 			getStats() {
 				this.fillData();
 			},
+			getTimeseries() {
+				this.fillData();
+			},
 			limit() {
 				this.fillData();
 			},
 		},
-		mounted() {},
+		mounted() {
+			this.limit = 0;
+		},
 		methods: {
 			fillData() {
 				this.datacollection = {
@@ -137,14 +141,7 @@
 			},
 		},
 		computed: {
-			...mapGetters([
-				"getStats",
-				"getTimeseries",
-				"getTimestamps",
-				"getNew",
-				"getDeceased",
-				"getRecovered",
-			]),
+			...mapGetters(["getStats", "getTimeseries"]),
 			freeByCountries() {
 				this.labels = [];
 				let countryArray = [];
