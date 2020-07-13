@@ -1,0 +1,4 @@
+{
+  "covid-stats": "https://spreadsheets.google.com/feeds/list/1DhrU8lCWYS_VKKQ3QOYbLzrJgHioQGQp5qPnpSNcUU8/1/public/values?alt=json",
+  "verified-stats": "https://raw.githubusercontent.com/MrSunshyne/covid19-mauritius/master/public/data/cases.json"
+}
