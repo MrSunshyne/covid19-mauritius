@@ -9,7 +9,7 @@ on:
     branches:
       - 'master'
     paths:
-      - 'public/data/.manual-trigger' # Commit to this file to trigger action
+      - 'static/data/.manual-trigger' # Commit to this file to trigger action
 
 jobs:
   fetchcommit:
@@ -19,18 +19,18 @@ jobs:
     - uses: actions/checkout@master
     - name: Fetch latest cases from API and place them into cases.json
       run: |
-        curl -f -H "Accept: application/json" 'https://besafemoris.mu/wp-json/wp/v2/getLocalCases' > public/data/cases.json
+        curl -f -H "Accept: application/json" 'https://besafemoris.mu/wp-json/wp/v2/getLocalCases' > static/data/cases.json
     - name: Validate cases.json
       uses: docker://orrosenblatt/validate-json-action:latest
       env:
-        INPUT_SCHEMA: public/data/schema.json
-        INPUT_JSONS: public/data/cases.json
+        INPUT_SCHEMA: static/data/schema.json
+        INPUT_JSONS: static/data/cases.json
     - name: Commit cases.json
       continue-on-error: true
       run: |
         git config --local user.email "actioner@github.com"
         git config --local user.name "GitHub Actioner"
-        git add public/data/cases.json
+        git add static/data/cases.json
         git commit -m "APIs data has been updated" -a
     - name: Push changes
       continue-on-error: true
