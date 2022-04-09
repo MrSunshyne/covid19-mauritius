@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "chart.js": "^2.9.3",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "nuxt": "^2.13.3",
     "vue-chartjs": "^3.5.0",
     "vue-range-component": "^1.0.3",
