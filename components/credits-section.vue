@@ -96,9 +96,9 @@ export default {
           role: 'code'
         },
         {
-          name: 'Giovanni Jules',
-          link: 'https://gophers.mu',
-          github: 'JulesMike',
+          name: 'Michaël Giovanni Jules',
+          link: 'https://mgjules.dev',
+          github: 'mgjules',
           role: 'Github Action'
         },
         {
