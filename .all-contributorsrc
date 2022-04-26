@@ -6,10 +6,10 @@
   "commit": false,
   "contributors": [
     {
-      "login": "JulesMike",
-      "name": "Jules Michael",
+      "login": "mgjules",
+      "name": "Michaël Giovanni Jules",
       "avatar_url": "https://avatars3.githubusercontent.com/u/38979769?v=4",
-      "profile": "https://gophers.mu",
+      "profile": "https://mgjules.dev",
       "contributions": [
         "code",
         "bug"
