@@ -19,6 +19,9 @@
     "vue-range-component": "^1.0.3",
     "vuejs-datepicker": "^1.6.2"
   },
+  "overrides": {
+    "path-to-regexp": "0.1.13"
+  },
   "devDependencies": {
     "@nuxtjs/google-analytics": "^2.3.0",
     "@nuxtjs/tailwindcss": "^1.0.0",
