@@ -14,21 +14,22 @@
   "dependencies": {
     "chart.js": "^2.9.3",
     "moment": "^2.27.0",
-    "nuxt": "^2.13.3",
+    "nuxt": "^2.18.1",
     "vue-chartjs": "^3.5.0",
     "vue-range-component": "^1.0.3",
     "vuejs-datepicker": "^1.6.2"
   },
   "overrides": {
-    "path-to-regexp": "0.1.13"
+    "path-to-regexp": "0.1.13",
+    "postcss": "^8.5.25"
   },
   "devDependencies": {
     "@nuxtjs/google-analytics": "^2.3.0",
-    "@nuxtjs/tailwindcss": "^1.0.0",
+    "@nuxtjs/tailwindcss": "^4.2.1",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "node-sass": "^4.14.1",
     "prettier": "^1.19.1",
-    "sass-loader": "^8.0.2"
+    "sass": "^1.77.8",
+    "sass-loader": "^10.5.2"
   }
 }
